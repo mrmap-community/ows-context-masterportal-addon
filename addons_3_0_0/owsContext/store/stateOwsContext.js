@@ -8,11 +8,7 @@ const state = {
     onlyDesktop: false,
     useConfigName: true,
     parentId: true,
-    myObject: {
-        key: {
-            nested: "nestedValue"
-        }
-    }
+    layerObjects: undefined
 };
 
 export default state;
