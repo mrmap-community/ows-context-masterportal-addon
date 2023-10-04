@@ -1,0 +1,78 @@
+[
+  {
+    "id": "basemap1",
+    "name": "EOC Basemap",
+    "capabilitiesUrl": "https://tiles.geoservice.dlr.de/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities",
+    "typ": "WMTS",
+    "layers": "eoc:basemap",
+    "optionsFromCapabilities": true,
+    "format": "image/png"
+  },
+  {
+    "id": "20wms",
+    "url": "https://sgx.geodatenzentrum.de/wms_topplus_open",
+    "name": "Webkarte S/W WMS",
+    "typ": "WMS",
+    "minScale": "0",
+    "maxScale": "25000000",
+    "layers": "web_light_grau",
+    "transparent": false,
+    "tilesize": "512",
+    "version": "1.3.0",
+    "format": "image/png",
+    "legend": "https://sg.geodatenzentrum.de/wms_topplus_open?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=web_light&FORMAT=image/png"
+  },
+  {
+    "id": "1834",
+    "name": "Kuehle Orte",
+    "url": "https://geowebdienste.frankfurt.de/KuehleOrte",
+    "typ": "WFS",
+    "featureType": "Kuehle_Orte",
+    "outputFormat": "XML",
+    "version": "1.1.0",
+    "featureNS": "https://geowebdienste.frankfurt.de/KuehleOrte",
+    "gfiAttributes": {
+      "Klassifizierung": "Klassifizierung",
+      "Name": "Name",
+      "Adresse": "Adresse",
+      "Beschreibung": "Beschreibung",
+      "Quelle_Infos": "Quelle / Infos",
+      "Kostenfrei": "Kostenfrei"
+    },
+    "gfiTheme": "default",
+    "layerAttribution": "nicht vorhanden",
+    "legendURL": "",
+    "hitTolerance": ""
+  },
+  {
+    "id": "10",
+    "name": "Erfrischungsbrunnen",
+    "url": "https://geowebdienste.frankfurt.de/Erfrischungsbrunnen_WFS",
+    "typ": "WFS",
+    "featureType": "Erfrischungsbrunnen",
+    "outputFormat": "XML",
+    "version": "1.1.0",
+    "featureNS": "https://geowebdienste.frankfurt.de/Erfrischungsbrunnen_WFS",
+    "gfiAttributes": "ignore",
+    "gfiTheme": "default",
+    "layerAttribution": "nicht vorhanden",
+    "legendURL": "",
+    "hitTolerance": 0,
+    "datasets": [
+      {
+        "md_id": "fa6035c9-a16e-4be8-8830-e9cf6ac5ea11",
+        "csw_url": "https://geodatenkatalog.frankfurt.de/geonetwork/gdk_extern/ger/csw",
+        "show_doc_url": "https://geodatenkatalog.frankfurt.de/geonetwork/gdk_extern/ger/catalog.search#/metadata/",
+        "rs_id": "https://geodatenkatalog.frankfurt.de:/geonetwork/gdk_extern/ger/csw?service=CSW&request=GetRecordById&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full&id=fa6035c9-a16e-4be8-8830-e9cf6ac5ea11",
+        "md_name": "Erfrischungsbrunnen Frankfurt am Main",
+        "bbox": "8.467257 50.011104,8.846474 50.228066",
+        "kategorie_opendata": [],
+        "kategorie_inspire": [
+          "kein INSPIRE-Thema"
+        ],
+        "kategorie_organisation": ""
+      }
+    ],
+    "urlIsVisible": true
+  }
+]
