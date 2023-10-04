@@ -1,8 +1,8 @@
 import {generateSimpleMutations} from "../../../../src_3_0_0/shared/js/utils/generators";
-import stateOWSContext from "./stateOWSContext";
+import stateOwsContext from "./stateOwsContext";
 
 const mutations = {
-    ...generateSimpleMutations(stateOWSContext),
+    ...generateSimpleMutations(stateOwsContext),
     /**
      * If name from config.json starts with "translate#", the corrected key is set to name here.
      * @param {object} state of this component
