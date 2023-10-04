@@ -1,11 +1,11 @@
 <script>
 import {mapGetters} from "vuex";
-import getters from "../store/gettersOWSContext";
+import getters from "../store/gettersOwsContext";
 
 /**
- * @module modules/OWSContext */
+ * @module modules/OwsContext */
 export default {
-    name: "OWSContext",
+    name: "OwsContext",
     components: {
     },
     data () {
@@ -14,7 +14,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters("Modules/OWSContext", Object.keys(getters))
+        ...mapGetters("Modules/OwsContext", Object.keys(getters))
     },
     mounted () {
         console.log("Addon mouted");
