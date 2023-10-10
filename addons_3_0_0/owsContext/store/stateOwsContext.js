@@ -1,6 +1,6 @@
 const state = {
     type: "owsContext",
-    name: "OwsContext",
+    name: "Ows Context",
     id: "OwsContext",
     icon: "bi-signpost",
     active: false,
