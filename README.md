@@ -2,9 +2,18 @@
 
 ## Dev
 
-- use node v16.18.1, e.g. `nvm use v16.18.1`
-- run ./initSetup.sh
+- use node v18, e.g. `nvm use v18`
+- run `./initSetup.sh`
 - `cd masterportal-code && npm run start`
 - Masterportal Dev Mode will be started at `https://localhost:9001`
 - See demo portal config at `https://localhost:9001/portal/demo`
+
+### Watch for changes
+
+```sh
+mkdir -p ./masterportal-code/addons/addons_3_0_0/owsContext
+cd addons_3_0_0/owsContext
+npm i
+npm run watch:copyto ../../masterportal-code/addons/addons_3_0_0/owsContext
+```
 

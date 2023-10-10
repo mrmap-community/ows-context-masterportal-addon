@@ -3,9 +3,9 @@
 # Stop at first command failure.
 set -e
 
-#nvm use v16.18.1
+#nvm use v18
 
-COMMIT_HASH=bc88b5af8d9f1ecdc939993a285783448a6d81bb
+GIT_COMMIT=f2238c2db198e95412101e491c0924c8949ae576
 
 
 if [ ! -d "masterportal-code" ]; then
@@ -13,8 +13,9 @@ if [ ! -d "masterportal-code" ]; then
 fi
 
 cd masterportal-code
+git fetch --all
 # checkout version tag
-git checkout $COMMIT_HASH
+git checkout $GIT_COMMIT
 # install dependencies
 npm ci
 

@@ -1,6 +1,6 @@
 const state = {
     type: "owsContext",
-    name: "OwsContext",
+    name: "Ows Context",
     id: "OwsContext",
     icon: "bi-signpost",
     active: false,
@@ -8,11 +8,7 @@ const state = {
     onlyDesktop: false,
     useConfigName: true,
     parentId: true,
-    myObject: {
-        key: {
-            nested: "nestedValue"
-        }
-    }
+    layerObjects: undefined
 };
 
 export default state;
