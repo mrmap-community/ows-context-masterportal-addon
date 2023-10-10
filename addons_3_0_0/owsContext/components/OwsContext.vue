@@ -6,7 +6,8 @@ import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
 
 /**
- * @module modules/OwsContext */
+ * @module modules/OwsContext
+ */
 export default {
     name: "OwsContext",
     components: {
@@ -25,21 +26,12 @@ export default {
     },
     watch: {
         layerObjects: async function (layerList) {
-            // function for layer import
             const promises = layerList.map(ll => {
+                // todo: determine parentKey from ows context
                 return this.addLayerToLayerConfig({layerConfig: ll, parentKey: "Baselayer"});
             });
-            const results = await Promise.allSettled(promises);
 
-            if (results) {
-                console.log("context has been added");
-            }
-            else {
-                console.log("context has not been added.");
-            }
-        },
-        owcUrl: function (owc) {
-            console.log("owcUrl changed to: ", owc);
+            await Promise.allSettled(promises);
         }
     },
     methods: {
@@ -60,19 +52,17 @@ export default {
 
             const newConfig = {
                 mapView: {
-                    extent: owsProperties.bbox // todo: convert to crs
-                    // startCenter:
-                    // startZoomLevel:
+                    // todo: convert to crs
+                    extent: owsProperties.bbox
                 },
                 ...portalConfig
             };
 
             // todo: properly generate new config
-
             this.setPortalConfig(newConfig);
 
+            // or: commit via action
             // this.modifyPortalConfig(newConfig);
-            // commit("setPortalConfig", newConfig, {root: true});
 
             const layers = context.features;
             const mpConfigs = layers.map(l => {
@@ -99,7 +89,7 @@ export default {
                 return {};
             });
 
-            // add first 10 layers
+            // restrict to first 10 layers for testing
             const firstWmsConfigs = [...mpConfigs].slice(0, 10);
 
             this.setLayerObjects(firstWmsConfigs);
