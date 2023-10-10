@@ -1,0 +1,32 @@
+{
+  "name": "owscontext-addon",
+  "version": "1.0.0",
+  "description": "Masterportal-Addon which allows to parse OWS contexts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:copyto": "node watchCopy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.terrestris.de/terrestris/ows-context-masterportal-addon"
+  },
+  "keywords": [
+    "masterportal",
+    "vue",
+    "ows",
+    "context",
+    "ogc"
+  ],
+  "author": "Lukas Lohoff",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-vue": "^9.17.0",
+    "eslint-plugin-vuejs-accessibility": "^2.2.0",
+    "fs-extra": "^11.1.1",
+    "path-exists-cli": "^2.0.0",
+    "watch": "^1.0.2"
+  }
+}

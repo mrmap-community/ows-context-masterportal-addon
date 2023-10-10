@@ -5,7 +5,7 @@ set -e
 
 #nvm use v16.18.1
 
-COMMIT_HASH=bc88b5af8d9f1ecdc939993a285783448a6d81bb
+GIT_TAG=v3.0.0-beta1
 
 
 if [ ! -d "masterportal-code" ]; then
@@ -13,8 +13,9 @@ if [ ! -d "masterportal-code" ]; then
 fi
 
 cd masterportal-code
+git fetch --all
 # checkout version tag
-git checkout $COMMIT_HASH
+git checkout $GIT_TAG
 # install dependencies
 npm ci
 

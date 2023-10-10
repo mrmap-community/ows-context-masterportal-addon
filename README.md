@@ -7,10 +7,15 @@
 - `cd masterportal-code && npm run start`
 - Masterportal Dev Mode will be started at `https://localhost:9001`
 - See demo portal config at `https://localhost:9001/portal/demo`
+- Bugfix in layerFactory.js necessary
+    - https://bitbucket.org/geowerkstatt-hamburg/masterportal/issues/1085/beta-l-sst-sich-nicht-via-npm-start-unter
 
 ### Watch for changes
 
-- `npm i -g watch-build-copy`
-- `mkdir ./masterportal-code/addons/addons_3_0_0`
-- `watch-build-copy './addons_3_0_0' 'echo' './addons_3_0_0' './masterportal-code/addons/addons_3_0_0'`
+```sh
+mkdir -p ./masterportal-code/addons/addons_3_0_0/owsContext
+cd addons_3_0_0/owsContext
+npm i
+npm run watch:copyto ../../masterportal-code/addons/addons_3_0_0/owsContext
+```
 
