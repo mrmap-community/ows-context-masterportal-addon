@@ -3,7 +3,7 @@
 # Stop at first command failure.
 set -e
 
-#nvm use v16.18.1
+#nvm use v18
 
 GIT_COMMIT=f2238c2db198e95412101e491c0924c8949ae576
 

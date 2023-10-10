@@ -2,13 +2,11 @@
 
 ## Dev
 
-- use node v16.18.1, e.g. `nvm use v16.18.1`
-- run ./initSetup.sh
+- use node v18, e.g. `nvm use v18`
+- run `./initSetup.sh`
 - `cd masterportal-code && npm run start`
 - Masterportal Dev Mode will be started at `https://localhost:9001`
 - See demo portal config at `https://localhost:9001/portal/demo`
-- Bugfix in layerFactory.js necessary
-    - https://bitbucket.org/geowerkstatt-hamburg/masterportal/issues/1085/beta-l-sst-sich-nicht-via-npm-start-unter
 
 ### Watch for changes
 
