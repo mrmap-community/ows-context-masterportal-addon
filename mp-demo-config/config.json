@@ -35,7 +35,27 @@
       "layerPillsAmount": 2,
       "highlightedFeatures": {
         "active": true
-      }
+      },
+      "addLayerButton": true,
+      "type": "auto",
+      "validLayerTypesAutoTree": [
+        "WMS"
+      ],
+      "categories": [
+        {
+          "key": "kategorie_opendata",
+          "name": "Opendata",
+          "active": true
+        },
+        {
+          "key": "kategorie_inspire",
+          "name": "Inspire"
+        },
+        {
+          "key": "kategorie_organisation",
+          "name": "Organisation"
+        }
+      ]
     },
     "mainMenu": {
       "expanded": true,

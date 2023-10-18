@@ -23,7 +23,7 @@
       50.40194182468192
     ],
     "contextMetadata": [
-      "https://www.geoportal.rlp.de/mapbender/php/mod_showMetadata.php?languageCode=de&resource=wmc&layout=tabs&id=2506"
+      "https://www.geoportal.rlp.de/mapbender/php/mod_layerISOMetadata.php?SERVICE=WMS&outputFormat=iso19139&Id=70850"
     ],
     "links": {
       "profiles": ["http://www.opengis.net/spec/owc-geojson/1.0/req/core"]

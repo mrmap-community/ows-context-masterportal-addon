@@ -3,7 +3,7 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import getters from "../store/gettersOwsContext";
 import mutations from "../store/mutationsOwsContext";
 import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components/LightButton.vue";
-import {treeSubjectsKey} from "../../../../src_3_0_0/shared/js/utils/constants";
+import {treeSubjectsKey, treeTopicConfigKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 
 /**
  * @module modules/OwsContext
@@ -23,7 +23,11 @@ export default {
         ...mapGetters("Modules/OwsContext", Object.keys(getters)),
         ...mapGetters([
             "allBaselayerConfigs",
-            "allLayerConfigs"
+            "allLayerConfigs",
+            "portalConfig"
+        ]),
+        ...mapGetters("Menu", [
+            "mainMenu"
         ])
     },
     watch: {
@@ -36,6 +40,8 @@ export default {
             });
 
             await Promise.allSettled(promises);
+
+            console.log('this.portalConfig ENDE', this.portalConfig);
         }
     },
     methods: {
@@ -48,11 +54,15 @@ export default {
             "importGeoJSON",
             "openDrawTool"
         ]),
-        ...mapActions(["addLayerToLayerConfig"]),
+        ...mapActions([
+            "addLayerToLayerConfig",
+            "extendLayers"
+        ]),
         ...mapActions("Modules/OwsContext", ["modifyPortalConfig"]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
         ...mapMutations(["setPortalConfig"]),
+        ...mapMutations("Menu", ["setMainMenu"]),
         ...mapMutations("Modules/BaselayerSwitcher", [
             "setActivatedExpandable",
             "setBaselayerIds",
@@ -72,12 +82,44 @@ export default {
             }
 
             const context = await response.json();
+
+            // fetch meta data
+            const metadataUrlIso = context.properties.contextMetadata?.find(link => link.indexOf("iso19139") !== -1);
+            const metadataUrl = context.properties.contextMetadata;
+
+            if (metadataUrlIso) {
+                // todo: fetch metadata (needs example)
+                // const metadataResponse = await fetch(metadataUrl);
+                // const parser = new DOMParser();
+                // const xml = parser.parseFromString(metadataResponse, "application/xml");
+                // todo: get logo from metadata and update mainMenu.logo below
+            }
+
+            // set bbox
             const crs = mapCollection.getMapView("2D").getProjection().getCode();
             const extension = context.properties.extension[0].projections.find(p => p.code === crs);
 
-            this.zoomToExtent({extent: extension?.bbox, options: {
-                padding: [5, 5, 5, 5]
-            }});
+            if (extension) {
+                this.zoomToExtent({extent: extension?.bbox, options: {
+                    padding: [5, 5, 5, 5]
+                }});
+            }
+            // todo: convert bbox to current crs
+            // todo: set max / min zoom based on extent
+
+            // set title
+            const modifiedMenu = {
+                ...this.mainMenu,
+                title: {
+                    ...this.mainMenu.title,
+                    link: metadataUrl,
+                    logo: "",
+                    text: context.properties?.title ?? "Unnamed OWS Context",
+                    tooltip: context.properties?.title ?? "Unnamed OWS Context"
+                }
+            };
+
+            this.setMainMenu(modifiedMenu);
 
             const owcLayers = context.features;
             const mpConfigs = owcLayers.map(l => {
@@ -103,7 +145,24 @@ export default {
                         type: "layer",
                         showInLayerTree: true,
                         folder: l.properties.folder,
-                        baselayer: false
+                        baselayer: false,
+                        // todo: display layer categories in Masterportal catalog
+                        // continue here
+                        datasets: [
+                            {
+                                md_id: "E8954AFE-F94F-45E1-B255-0E01C37D57D0",
+                                csw_url: "https://metaver.de/csw",
+                                show_doc_url: "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
+                                bbox: "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
+                                rs_id: "https://registry.gdi-de.org/id/de.hh/d1c21e8d-f36d-4d15-8da5-b6bfc7adad4b",
+                                kategorie_opendata: [
+                                    "Bevölkerung und Gesellschaft"
+                                ],
+                                kategorie_inspire: ["kein INSPIRE-Thema"],
+                                kategorie_organisation: "Bezirksämter",
+                                md_name: l.properties.title
+                            }
+                        ]
                     };
                 }
                 if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wmts") {
@@ -131,12 +190,10 @@ export default {
                 if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
                     // todo: position in layer tree
                     // todo: fix kml import
-                    // this.addLayerConfig()
-                    //     .then(layer => {
-                    //         if (layer) {
-                    //             this.importKML({raw: l.offerings[0].content[0].content, layer: layer.layer, filename: "test.kml"});
-                    //         }
-                    //     });
+                    // const kml = await this.addLayerConfig();
+                    // if (kml) {
+                    //     await this.importKML({raw: l.offerings[0].content[0].content, layer: layer.layer, filename: "test.kml"});
+                    // }
                 }
                 return {};
             });
@@ -159,8 +216,24 @@ export default {
             };
 
             const tree = getFolderConfigs(owcLayers, 1);
-            console.log(tree);
             // todo: apply tree
+
+            const newConfig = {
+                [treeTopicConfigKey]: {
+                    [treeSubjectsKey]: {
+                        elements: tree
+                    }
+                },
+                ...this.portalConfig
+            };
+
+            await this.setPortalConfig(newConfig, {root: true});
+
+            // Object.keys(configJson[treeTopicConfigKey]).forEach(topic => {
+            //     commit("setLayerConfigByParentKey", {layerConfigs: configJson[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
+            // });
+
+            this.extendLayers(null, {root: true});
 
             // restricted to first 20 layers for testing
             const validConfigs = mpConfigs.filter(config => Boolean(config));
