@@ -36,26 +36,7 @@
       "highlightedFeatures": {
         "active": true
       },
-      "addLayerButton": true,
-      "type": "auto",
-      "validLayerTypesAutoTree": [
-        "WMS"
-      ],
-      "categories": [
-        {
-          "key": "kategorie_opendata",
-          "name": "Opendata",
-          "active": true
-        },
-        {
-          "key": "kategorie_inspire",
-          "name": "Inspire"
-        },
-        {
-          "key": "kategorie_organisation",
-          "name": "Organisation"
-        }
-      ]
+      "addLayerButton": true
     },
     "mainMenu": {
       "expanded": true,
@@ -72,6 +53,9 @@
           },
           {
             "type": "owsContext"
+          },
+          {
+            "type": "openConfig"
           }
         ]
       ]
@@ -101,8 +85,7 @@
       ]
     },
     "Fachdaten": {
-      "elements": [
-      ]
+      "elements": []
     }
   }
 }
