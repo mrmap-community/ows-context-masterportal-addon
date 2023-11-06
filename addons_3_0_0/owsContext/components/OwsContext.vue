@@ -140,6 +140,27 @@ export default {
             }
             return false;
         },
+        getFolderConfigs: function (owcList, level) {
+            const subFolders = owcList.filter(owc => owc.properties?.folder?.split("/").length === level + 1);
+            const isLeafNode = subFolders.length === 0;
+
+            if (isLeafNode) {
+                return owcList.map(this.getMasterPortalConfigFromOwc);
+            }
+
+            return subFolders.map((owcFolder) => {
+                const folder = owcFolder.properties?.folder;
+                const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
+
+                return {
+                    // id: owcFolder.properties.folder,
+                    name: owcFolder.properties.folder,
+                    type: owcFolder.properties.folder ? "folder" : undefined,
+                    // showInLayerTree: false,
+                    elements: folder && this.getFolderConfigs(subElements, level + 1)
+                };
+            });
+        },
         parseContext: async function () {
             const response = await fetch(this.owcUrl, {});
 
@@ -192,30 +213,7 @@ export default {
 
             const owcLayers = context.features;
 
-            // eslint-disable-next-line
-            const getFolderConfigs = (owcList, level) => {
-                const subFolders = owcList.filter(owc => owc.properties?.folder?.split("/").length === level + 1);
-                const isLeafNode = subFolders.length === 0;
-
-                if (isLeafNode) {
-                    return owcList.map(this.getMasterPortalConfigFromOwc);
-                }
-
-                return subFolders.map((owcFolder) => {
-                    const folder = owcFolder.properties?.folder;
-                    const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
-
-                    return {
-                        // id: owcFolder.properties.folder,
-                        name: owcFolder.properties.folder,
-                        type: owcFolder.properties.folder ? "folder" : undefined,
-                        // showInLayerTree: false,
-                        elements: folder && getFolderConfigs(subElements, level + 1)
-                    };
-                });
-            };
-
-            const tree = getFolderConfigs(owcLayers, 1);
+            const tree = this.getFolderConfigs(owcLayers, 1);
 
             // restrict to first 3 folders to avoid crashes
             const smallTree = [...tree].slice(0, 3);
