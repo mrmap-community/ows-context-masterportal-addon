@@ -99,7 +99,6 @@ export default {
                     showInLayerTree: true,
                     folder: l.properties.folder,
                     notSupportedFor3DNeu: false,
-                    // is3DLayer: false, // check which attributes are necessary
                     singleTile: true, // check which attributes are necessary
                     cache: false, // check which attributes are necessary
                     datasets: [
