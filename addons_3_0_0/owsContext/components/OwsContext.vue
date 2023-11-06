@@ -34,16 +34,6 @@ export default {
         ])
     },
     watch: {
-        layerObjects: async function (layerList) {
-            // add layers to layer tree
-            // const promises = layerList.map(ll => {
-            //     // todo: determine parentKey from ows context
-            //     // return this.addLayerToLayerConfig({layerConfig: ll, parentKey: ll.folder});
-            //     return this.addLayerToLayerConfig({layerConfig: ll, parentKey: treeSubjectsKey});
-            // });
-
-            // await Promise.allSettled(promises);
-        }
     },
     methods: {
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
@@ -102,8 +92,7 @@ export default {
                     singleTile: true, // check which attributes are necessary
                     cache: false, // check which attributes are necessary
                     datasets: [
-                        // dummy metadata
-                        // todo: parse metadata
+                        // dummy metadata, todo: parse metadata from ows context
                         {
                             md_id: "E8954AFE-F94F-45E1-B255-0E01C37D57D0",
                             csw_url: "https://metaver.de/csw",
@@ -152,9 +141,6 @@ export default {
             return false;
         },
         parseContext: async function () {
-            // remove existing layers
-            // this.allLayerConfigs.forEach(layer => this.removeLayer(layer));
-
             const response = await fetch(this.owcUrl, {});
 
             if (!response.ok) {
@@ -178,7 +164,7 @@ export default {
                 // todo: get logo from metadata and update mainMenu.logo below
             }
 
-            // set bbox
+            // set bbox (from ows context extension)
             const crs = mapCollection.getMapView("2D").getProjection().getCode();
             const extension = context.properties.extension[0].projections.find(p => p.code === crs);
 
@@ -190,7 +176,7 @@ export default {
             // todo: convert bbox to current crs
             // todo: set max / min zoom based on extent
 
-            // set title
+            // set the application title
             const modifiedMenu = {
                 ...this.mainMenu,
                 title: {
@@ -205,9 +191,6 @@ export default {
             this.setMainMenu(modifiedMenu);
 
             const owcLayers = context.features;
-            const mpConfigs = owcLayers
-                .map(this.getMasterPortalConfigFromOwc)
-                .filter(config => Boolean(config));
 
             // eslint-disable-next-line
             const getFolderConfigs = (owcList, level) => {
@@ -234,6 +217,7 @@ export default {
 
             const tree = getFolderConfigs(owcLayers, 1);
 
+            // restrict to first 3 folders to avoid crashes
             const smallTree = [...tree].slice(0, 3);
 
             const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
@@ -266,13 +250,6 @@ export default {
             });
 
             this.extendLayers(null, {root: true});
-
-            // restricted to first 20 layers for testing
-            // const validConfigs = mpConfigs.filter(config => Boolean(config));
-            // const firstWmsConfigs = [...validConfigs].slice(0, 10);
-
-            // this.setLayerObjects(firstWmsConfigs);
-            // todo: refresh wmts layers to make them visible (due to optionsFromCapabilities)
         }
     }
 };
