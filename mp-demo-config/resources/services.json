@@ -6,7 +6,20 @@
     "typ": "WMTS",
     "layers": "eoc:basemap",
     "optionsFromCapabilities": true,
-    "format": "image/png"
+    "format": "image/png",
+    "datasets": [
+      {
+        "md_id": "61C8428E-6270-4AA0-B38D-C1DC9964AAEA",
+        "csw_url": "https://metaver.de/csw",
+        "show_doc_url": "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
+        "rs_id": "https://registry.gdi-de.org/id/de.hh/932c8a6b-31f7-40e0-aade-c29c5c631c4f",
+        "md_name": "Internetstadtplan Hamburg",
+        "bbox": "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
+        "kategorie_opendata": ["Umwelt"],
+        "kategorie_inspire": ["kein INSPIRE-Thema"],
+        "kategorie_organisation": "Landesbetrieb Geoinformation und Vermessung"
+      }
+    ]
   },
   {
     "id": "20wms",
@@ -39,6 +52,7 @@
       "Quelle_Infos": "Quelle / Infos",
       "Kostenfrei": "Kostenfrei"
     },
+    "datasets": [],
     "gfiTheme": "default",
     "layerAttribution": "nicht vorhanden",
     "legendURL": "",

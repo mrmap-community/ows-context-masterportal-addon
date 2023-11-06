@@ -26,4 +26,4 @@ npm ci
 cp -r ../addons_3_0_0 addons/
 
 # copy demo config
-cp -r ../mp-demo-config portal/demo
+cp -r ../mp-demo-config/* portal/demo

@@ -35,7 +35,8 @@
       "layerPillsAmount": 2,
       "highlightedFeatures": {
         "active": true
-      }
+      },
+      "addLayerButton": true
     },
     "mainMenu": {
       "expanded": true,
@@ -52,6 +53,9 @@
           },
           {
             "type": "owsContext"
+          },
+          {
+            "type": "openConfig"
           }
         ]
       ]
@@ -81,8 +85,7 @@
       ]
     },
     "Fachdaten": {
-      "elements": [
-      ]
+      "elements": []
     }
   }
 }

@@ -1,8 +1,11 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import {isProxy, toRaw} from "vue";
 import getters from "../store/gettersOwsContext";
 import mutations from "../store/mutationsOwsContext";
 import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components/LightButton.vue";
+import {uniqueId} from "../../../../src_3_0_0/shared/js/utils/uniqueId.js";
+import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
 
 /**
@@ -15,84 +18,236 @@ export default {
     },
     data () {
         return {
-            owcUrl: "/portal/demo/resources/wmc.json"
+            // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json"
+            owcUrl: "/portal/demo/resources/examples/wmc.json"
         };
     },
     computed: {
         ...mapGetters("Modules/OwsContext", Object.keys(getters)),
         ...mapGetters([
+            "allBaselayerConfigs",
+            "allLayerConfigs",
             "portalConfig"
+        ]),
+        ...mapGetters("Menu", [
+            "mainMenu"
         ])
     },
     watch: {
-        layerObjects: async function (layerList) {
-            const promises = layerList.map(ll => {
-                // todo: determine parentKey from ows context
-                return this.addLayerToLayerConfig({layerConfig: ll, parentKey: "Baselayer"});
-            });
-
-            await Promise.allSettled(promises);
-        }
     },
     methods: {
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
-        ...mapActions(["addLayerToLayerConfig"]),
+        ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
+        ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapActions("Modules/FileImport", [
+            "addLayerConfig",
+            "importKML",
+            "importGeoJSON",
+            "openDrawTool"
+        ]),
+        ...mapActions([
+            "addLayerToLayerConfig",
+            "extendLayers"
+        ]),
         ...mapActions("Modules/OwsContext", ["modifyPortalConfig"]),
+        ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
         ...mapMutations(["setPortalConfig"]),
+        ...mapMutations("Modules/OpenConfig", ["setLayerConfigByParentKey"]),
+        ...mapMutations("Menu", ["setMainMenu"]),
+        ...mapMutations("Modules/BaselayerSwitcher", [
+            "setActivatedExpandable",
+            "setBaselayerIds",
+            "setTopBaselayerId"
+        ]),
+        getMasterPortalConfigFromOwc: function (l) {
+            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
+                const getMapOperation = l.offerings[0].operations.find(o => o.code === "GetMap");
+                const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
+                const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
+                const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
+
+                if (!getMapUrl) {
+                    return false;
+                }
+
+                return {
+                    id: `ows-${uniqueId()}`,
+                    name: l.properties.title,
+                    typ: "WMS",
+                    layers: getMapUrl?.searchParams.get("LAYERS"),
+                    url: getMapUrl ? `${getMapUrl?.origin}${getMapUrl?.pathname}` : `${getCapabilitiesUrl?.origin}${getCapabilitiesUrl?.pathname}`,
+                    version: getMapUrl?.searchParams.get("VERSION"),
+                    visibility: l.properties?.active ?? getMapOperation?.extension?.active ?? true,
+                    transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
+                    transparent: true,
+                    urlIsVisible: true,
+                    type: "layer",
+                    gfiAttributes: "showAll",
+                    gfiTheme: "default",
+                    layerAttribution: "nicht vorhanden",
+                    showInLayerTree: true,
+                    folder: l.properties.folder,
+                    notSupportedFor3DNeu: false,
+                    singleTile: true, // check which attributes are necessary
+                    cache: false, // check which attributes are necessary
+                    datasets: [
+                        // dummy metadata, todo: parse metadata from ows context
+                        {
+                            md_id: "E8954AFE-F94F-45E1-B255-0E01C37D57D0",
+                            csw_url: "https://metaver.de/csw",
+                            show_doc_url: "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
+                            bbox: "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
+                            rs_id: "https://registry.gdi-de.org/id/de.hh/d1c21e8d-f36d-4d15-8da5-b6bfc7adad4b",
+                            md_name: l.properties.title
+                            // md_name: "Verkehrslage auf Autobahnen (Schleifen) Hamburg",
+                            // kategorie_opendata: ["Verkehr"], // todo: handle categories
+                            // kategorie_inspire: ["Verkehrsnetze"],
+                            // kategorie_organisation: "Behörde für Verkehr und Mobilitätswende (BVM)"
+                        }
+                    ]
+                };
+            }
+            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wmts") {
+                const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
+                const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
+
+                if (!getCapabilitiesUrl) {
+                    return false;
+                }
+
+                return {
+                    id: l.properties.title,
+                    name: l.properties.title,
+                    typ: "WMTS",
+                    visibility: l.properties?.active,
+                    transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : undefined,
+                    capabilitiesUrl: getCapabilitiesOperation?.href,
+                    layers: l.properties?.extension?.layers, // todo: add extension for layer parameter
+                    optionsFromCapabilities: true,
+                    showInLayerTree: true,
+                    folder: l.properties.folder,
+                    baselayer: false
+                };
+            }
+            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
+                // todo: position in layer tree
+                // todo: fix kml import
+                // const kml = await this.addLayerConfig();
+                // if (kml) {
+                //     await this.importKML({raw: l.offerings[0].content[0].content, layer: layer.layer, filename: "test.kml"});
+                // }
+            }
+            return false;
+        },
+        getFolderConfigs: function (owcList, level) {
+            const subFolders = owcList.filter(owc => owc.properties?.folder?.split("/").length === level + 1);
+            const isLeafNode = subFolders.length === 0;
+
+            if (isLeafNode) {
+                return owcList.map(this.getMasterPortalConfigFromOwc);
+            }
+
+            return subFolders.map((owcFolder) => {
+                const folder = owcFolder.properties?.folder;
+                const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
+
+                return {
+                    // id: owcFolder.properties.folder,
+                    name: owcFolder.properties.folder,
+                    type: owcFolder.properties.folder ? "folder" : undefined,
+                    // showInLayerTree: false,
+                    elements: folder && this.getFolderConfigs(subElements, level + 1)
+                };
+            });
+        },
         parseContext: async function () {
-            // clear layers
-            layerCollection.clear();
-
             const response = await fetch(this.owcUrl, {});
+
+            if (!response.ok) {
+                this.addSingleAlert({
+                    category: "error",
+                    content: "Could not parse OWS Context"
+                });
+            }
+
             const context = await response.json();
-            const owsProperties = context.properties;
 
-            const portalConfig = this.portalConfig;
+            // fetch meta data
+            const metadataUrlIso = context.properties.contextMetadata?.find(link => link.indexOf("iso19139") !== -1);
+            const metadataUrl = context.properties.contextMetadata;
 
-            const newConfig = {
-                mapView: {
-                    // todo: convert to crs
-                    extent: owsProperties.bbox
-                },
-                ...portalConfig
+            if (metadataUrlIso) {
+                // todo: fetch metadata (needs example)
+                // const metadataResponse = await fetch(metadataUrl);
+                // const parser = new DOMParser();
+                // const xml = parser.parseFromString(metadataResponse, "application/xml");
+                // todo: get logo from metadata and update mainMenu.logo below
+            }
+
+            // set bbox (from ows context extension)
+            const crs = mapCollection.getMapView("2D").getProjection().getCode();
+            const extension = context.properties.extension[0].projections.find(p => p.code === crs);
+
+            if (extension) {
+                this.zoomToExtent({extent: extension?.bbox, options: {
+                    padding: [5, 5, 5, 5]
+                }});
+            }
+            // todo: convert bbox to current crs
+            // todo: set max / min zoom based on extent
+
+            // set the application title
+            const modifiedMenu = {
+                ...this.mainMenu,
+                title: {
+                    ...this.mainMenu.title,
+                    link: metadataUrl,
+                    logo: "",
+                    text: context.properties?.title ?? "Unnamed OWS Context",
+                    tooltip: context.properties?.title ?? "Unnamed OWS Context"
+                }
             };
 
-            // todo: properly generate new config
-            this.setPortalConfig(newConfig);
+            this.setMainMenu(modifiedMenu);
 
-            // or: commit via action
-            // this.modifyPortalConfig(newConfig);
+            const owcLayers = context.features;
 
-            const layers = context.features;
-            const mpConfigs = layers.map(l => {
-                if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
-                    const getMapOperation = l.offerings[0].operations.find(o => o.code === "GetMap");
-                    const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
-                    // const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
-                    // const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
+            const tree = this.getFolderConfigs(owcLayers, 1);
 
-                    const obj = {
-                        id: l.properties.title,
-                        name: l.properties.title,
-                        typ: "WMS",
-                        layers: getMapUrl?.searchParams.get("LAYERS"),
-                        url: `${getMapUrl?.origin}${getMapUrl?.pathname}`,
-                        version: getMapUrl?.searchParams.get("VERSION"),
-                        visibility: true,
-                        type: "layer",
-                        showInLayerTree: true
-                    };
+            // restrict to first 3 folders to avoid crashes
+            const smallTree = [...tree].slice(0, 3);
 
-                    return obj;
+            const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
+
+            const newConfig = {
+                [portalConfigKey]: portalConfigNoProxy,
+                [treeTopicConfigKey]: {
+                    [treeBaselayersKey]: {
+                        elements: [
+                            {
+                                id: "basemap1",
+                                visibility: true
+                            },
+                            {
+                                id: "20wms"
+                            }
+                        ]
+                    },
+                    [treeSubjectsKey]: {
+                        elements: smallTree
+                    }
                 }
-                return {};
+            };
+
+            layerCollection.clear();
+
+            await this.setPortalConfig(newConfig, {root: true});
+            Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
+                this.setLayerConfigByParentKey({layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
             });
 
-            // restrict to first 10 layers for testing
-            const firstWmsConfigs = [...mpConfigs].slice(0, 10);
-
-            this.setLayerObjects(firstWmsConfigs);
+            this.extendLayers(null, {root: true});
         }
     }
 };
@@ -103,7 +258,7 @@ export default {
         v-if="true"
         id="owsContext"
     >
-        <p>Link hier einfügen (JSON):</p>
+        <p>Link hier einfügen (GeoJSON):</p>
         <input
             v-model="owcUrl"
             placeholder="https://example.com/owc.json"
