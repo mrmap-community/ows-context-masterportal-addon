@@ -1,0 +1,15 @@
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+stages:
+  - lint
+
+lint:
+  stage: lint
+  image: node:18.18.2-alpine@sha256:51490771aba658439d29b1b03b60fc31e67bf0da3e01cb5903716310df4be1c1
+  script:
+    - npm ci
+    - npm run lint
