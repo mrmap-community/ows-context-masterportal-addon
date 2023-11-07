@@ -83,6 +83,8 @@ export default {
                     transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
                     transparent: true,
                     urlIsVisible: true,
+                    minScale: l.properties?.minScaleDenominator,
+                    maxScale: l.properties?.maxScaleDenominator,
                     type: "layer",
                     gfiAttributes: "showAll",
                     gfiTheme: "default",
