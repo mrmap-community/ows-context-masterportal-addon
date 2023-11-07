@@ -61,6 +61,7 @@ export default {
             "setTopBaselayerId"
         ]),
         getMasterPortalConfigFromOwc: function (l) {
+            // todo: the structure will change in the future: offerings will be a child of properties
             if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
                 const getMapOperation = l.offerings[0].operations.find(o => o.code === "GetMap");
                 const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
@@ -84,7 +85,7 @@ export default {
                     layers: getMapUrl?.searchParams.get("LAYERS"),
                     url: getMapUrl ? `${getMapUrl?.origin}${getMapUrl?.pathname}` : `${getCapabilitiesUrl?.origin}${getCapabilitiesUrl?.pathname}`,
                     version: getMapUrl?.searchParams.get("VERSION"),
-                    visibility: l.properties?.active ?? getMapOperation?.extension?.active ?? true,
+                    visibility: l.properties?.active ?? getMapOperation?.extension?.active ?? false,
                     transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
                     transparent: true,
                     urlIsVisible: true,
