@@ -18,7 +18,8 @@ export default {
     },
     data () {
         return {
-            // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json"
+            // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json",
+            // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json",
             owcUrl: "/portal/demo/resources/examples/wmc.json"
         };
     },
@@ -78,6 +79,22 @@ export default {
                     };
                 }
 
+                let metadataId;
+                let metadataUrl;
+
+                if (l.properties?.resourceMetadata) {
+                    // fetch metadata
+                    const mdUrl = new URL(l.properties?.resourceMetadata);
+
+                    metadataId = mdUrl.searchParams.get("id");
+                    metadataUrl = `${mdUrl.origin}${mdUrl.pathname}?`;
+
+                    // todo: metadata needs CORS headers
+                    // const metadataResponse = await fetch(mdUrl);
+                    // const parser = new DOMParser();
+                    // const xml = parser.parseFromString(metadataResponse, "application/xml");
+                }
+
                 return {
                     id: `ows-${uniqueId()}`,
                     name: l.properties.title,
@@ -98,14 +115,13 @@ export default {
                     notSupportedFor3DNeu: false,
                     singleTile: true, // forces single tiles to prevent performance issues
                     cache: false, // check which attributes are necessary
-                    datasets: [
-                        // dummy metadata, todo: parse metadata from ows context
+                    datasets: metadataUrl && [
                         {
-                            md_id: "E8954AFE-F94F-45E1-B255-0E01C37D57D0",
-                            csw_url: "https://metaver.de/csw",
-                            show_doc_url: "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
-                            bbox: "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
-                            rs_id: "https://registry.gdi-de.org/id/de.hh/d1c21e8d-f36d-4d15-8da5-b6bfc7adad4b",
+                            md_id: metadataId,
+                            csw_url: metadataUrl,
+                            // show_doc_url: "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
+                            // bbox: "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
+                            // rs_id: "https://registry.gdi-de.org/id/de.hh/d1c21e8d-f36d-4d15-8da5-b6bfc7adad4b",
                             md_name: l.properties.title
                             // md_name: "Verkehrslage auf Autobahnen (Schleifen) Hamburg",
                             // kategorie_opendata: ["Verkehr"], // todo: handle categories
@@ -183,6 +199,7 @@ export default {
             const metadataUrl = context.properties.contextMetadata;
 
             if (metadataUrlIso) {
+                // commented-out because metadata urls have to enable CORS
                 // todo: fetch metadata (needs example)
                 // const metadataResponse = await fetch(metadataUrl);
                 // const parser = new DOMParser();
@@ -219,7 +236,6 @@ export default {
             const owcLayers = context.features;
 
             const tree = this.getFolderConfigs(owcLayers, 1);
-            console.log('tree', tree);
 
             const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
 
@@ -227,15 +243,7 @@ export default {
                 [portalConfigKey]: portalConfigNoProxy,
                 [treeTopicConfigKey]: {
                     [treeBaselayersKey]: {
-                        elements: [
-                            {
-                                id: "basemap1",
-                                visibility: true
-                            },
-                            {
-                                id: "20wms"
-                            }
-                        ]
+                        elements: []
                     },
                     [treeSubjectsKey]: {
                         elements: tree
