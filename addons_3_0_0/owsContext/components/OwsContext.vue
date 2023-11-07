@@ -7,6 +7,7 @@ import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components
 import {uniqueId} from "../../../../src_3_0_0/shared/js/utils/uniqueId.js";
 import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
+import {transformExtent} from "ol/proj";
 
 /**
  * @module modules/OwsContext
@@ -187,15 +188,18 @@ export default {
 
             // set bbox (from ows context extension)
             const crs = mapCollection.getMapView("2D").getProjection().getCode();
-            const extension = context.properties.extension[0].projections.find(p => p.code === crs);
 
-            if (extension) {
-                this.zoomToExtent({extent: extension?.bbox, options: {
-                    padding: [5, 5, 5, 5]
-                }});
+            if (context.properties.extension) {
+                const extension = context.properties.extension[0].projections.find(p => p.code === crs);
+
+                this.zoomToExtent({extent: extension.bbox});
             }
-            // todo: convert bbox to current crs
-            // todo: set max / min zoom based on extent
+            else {
+                const bbox = context.properties.bbox;
+                const transformedBbox = transformExtent(bbox, "EPSG:4326", crs);
+
+                this.zoomToExtent({extent: transformedBbox});
+            }
 
             // set the application title
             const modifiedMenu = {
@@ -278,6 +282,7 @@ export default {
     display: flex;
     flex-direction: column;
 }
+
 #owsButton {
     margin-top: 10px;
 }
