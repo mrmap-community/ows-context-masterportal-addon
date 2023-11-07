@@ -43,7 +43,6 @@ export default {
         ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Modules/FileImport", [
-            "addLayerConfig",
             "importKML",
             "importGeoJSON",
             "openDrawTool"
@@ -53,7 +52,8 @@ export default {
             "extendLayers"
         ]),
         ...mapActions("Modules/OwsContext", [
-            "modifyPortalConfig"
+            "modifyPortalConfig",
+            "addLayerConfigWithName"
         ]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
@@ -66,7 +66,8 @@ export default {
             "setTopBaselayerId"
         ]),
         addKmlLayer: async function (kmlConfig) {
-            const kml = await this.addLayerConfig();
+            this.modifyPortalConfig();
+            const kml = await this.addLayerConfigWithName(kmlConfig.properties?.title);
 
             if (kml) {
                 await this.importKML({raw: kmlConfig.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"});
