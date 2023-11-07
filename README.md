@@ -2,7 +2,7 @@
 
 ## Dev
 
-- use node v18, e.g. `nvm use v18`
+- use node v18.x, e.g. `nvm use v18.18.2`
 - run `./initSetup.sh`
 - `cd masterportal-code && npm run start`
 - Masterportal Dev Mode will be started at `https://localhost:9001`

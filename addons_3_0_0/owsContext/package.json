@@ -4,8 +4,8 @@
   "description": "Masterportal-Addon which allows to parse OWS contexts.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:copyto": "node watchCopy.js"
+    "watch:copyto": "node watchCopy.js",
+    "lint": "eslint --max-warnings 0 \"./**/*.{vue,js}\""
   },
   "repository": {
     "type": "git",

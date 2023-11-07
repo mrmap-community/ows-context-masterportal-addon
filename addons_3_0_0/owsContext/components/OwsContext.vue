@@ -215,9 +215,6 @@ export default {
 
             const tree = this.getFolderConfigs(owcLayers, 1);
 
-            // restrict to first 3 folders to avoid crashes
-            const smallTree = [...tree].slice(0, 3);
-
             const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
 
             const newConfig = {
@@ -235,7 +232,7 @@ export default {
                         ]
                     },
                     [treeSubjectsKey]: {
-                        elements: smallTree
+                        elements: tree
                     }
                 }
             };
