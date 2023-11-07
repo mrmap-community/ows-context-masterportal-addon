@@ -9,13 +9,13 @@ const watch = require('watch');
 
 const curDir = process.cwd();
 
-if (process.argv.length < 3) {
-  console.log('please specify target path');
+if (process.argv.length < 4) {
+  console.log('please specify source and target path');
   process.exit(0);
 }
 
-const sourcePath = path.join(curDir, '');
-const targetPath = path.join(curDir, process.argv[2]);
+const sourcePath = path.join(curDir, process.argv[2]);
+const targetPath = path.join(curDir, process.argv[3]);
 
 console.log('sourcePath', sourcePath);
 console.log('targetPath', targetPath);
@@ -27,7 +27,7 @@ if (!fs.existsSync(targetPath)) {
 async function copy() {
 
   try {
-    console.log(`Copying current directory to ${targetPath}…`);
+    console.log(`Copying ${sourcePath} to ${targetPath}…`);
     await fs.copy(sourcePath, targetPath, {
       // do not copy node_modules
       filter: (src, dest) => {
