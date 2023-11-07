@@ -14,6 +14,11 @@
 mkdir -p ./masterportal-code/addons/addons_3_0_0/owsContext
 cd addons_3_0_0/owsContext
 npm i
-npm run watch:copyto ../../masterportal-code/addons/addons_3_0_0/owsContext
+npm run watch:copyto ./ ../../masterportal-code/addons/addons_3_0_0/owsContext
 ```
 
+### Watch for changes (configuration files)
+
+```sh
+npm run watch:copyto ../../mp-demo-config ../../masterportal-code/portal/demo
+```
