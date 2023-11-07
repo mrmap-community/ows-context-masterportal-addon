@@ -68,7 +68,13 @@ export default {
                 const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
 
                 if (!getMapUrl) {
-                    return false;
+                    // generate an empty folder if no getMap operation is specified
+                    return {
+                        id: `ows-${uniqueId()}`,
+                        name: l.properties.title,
+                        folder: l.properties.folder,
+                        type: "folder"
+                    };
                 }
 
                 return {
@@ -89,7 +95,7 @@ export default {
                     showInLayerTree: true,
                     folder: l.properties.folder,
                     notSupportedFor3DNeu: false,
-                    singleTile: true, // check which attributes are necessary
+                    singleTile: true, // forces single tiles to prevent performance issues
                     cache: false, // check which attributes are necessary
                     datasets: [
                         // dummy metadata, todo: parse metadata from ows context
@@ -153,10 +159,8 @@ export default {
                 const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
 
                 return {
-                    // id: owcFolder.properties.folder,
-                    name: owcFolder.properties.folder,
+                    name: owcFolder.properties.title ?? owcFolder.properties.folder,
                     type: owcFolder.properties.folder ? "folder" : undefined,
-                    // showInLayerTree: false,
                     elements: folder && this.getFolderConfigs(subElements, level + 1)
                 };
             });
@@ -214,6 +218,7 @@ export default {
             const owcLayers = context.features;
 
             const tree = this.getFolderConfigs(owcLayers, 1);
+            console.log('tree', tree);
 
             const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
 
