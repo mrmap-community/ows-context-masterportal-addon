@@ -21,7 +21,8 @@ export default {
         return {
             // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json",
             // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json",
-            owcUrl: "/portal/demo/resources/examples/wmc.json"
+            owcUrl: "/portal/demo/resources/examples/wmc.json",
+            kmlLayers: []
         };
     },
     computed: {
@@ -40,7 +41,7 @@ export default {
     methods: {
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
         ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
-        ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Modules/FileImport", [
             "addLayerConfig",
             "importKML",
@@ -51,7 +52,9 @@ export default {
             "addLayerToLayerConfig",
             "extendLayers"
         ]),
-        ...mapActions("Modules/OwsContext", ["modifyPortalConfig"]),
+        ...mapActions("Modules/OwsContext", [
+            "modifyPortalConfig"
+        ]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
         ...mapMutations(["setPortalConfig"]),
@@ -62,6 +65,13 @@ export default {
             "setBaselayerIds",
             "setTopBaselayerId"
         ]),
+        addKmlLayer: async function (kmlConfig) {
+            const kml = await this.addLayerConfig();
+
+            if (kml) {
+                await this.importKML({raw: kmlConfig.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"});
+            }
+        },
         getMasterPortalConfigFromOwc: function (l) {
             // todo: the structure will change in the future: offerings will be a child of properties
             if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
@@ -157,12 +167,7 @@ export default {
                 };
             }
             if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
-                // todo: position in layer tree
-                // todo: fix kml import
-                // const kml = await this.addLayerConfig();
-                // if (kml) {
-                //     await this.importKML({raw: l.offerings[0].content[0].content, layer: layer.layer, filename: "test.kml"});
-                // }
+                this.kmlLayers.push(l);
             }
             return false;
         },
@@ -265,6 +270,15 @@ export default {
             });
 
             this.extendLayers(null, {root: true});
+
+            for (let i = 0; i < this.kmlLayers.length; i++) {
+                const kmlLayer = this.kmlLayers[i];
+
+                await this.addKmlLayer(kmlLayer);
+            }
+
+            // remove import alerts
+            this.cleanup();
         }
     }
 };
