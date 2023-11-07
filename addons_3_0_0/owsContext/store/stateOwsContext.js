@@ -8,7 +8,8 @@ const state = {
     onlyDesktop: false,
     useConfigName: true,
     parentId: true,
-    layerObjects: undefined
+    layerObjects: undefined,
+    layerId: "importDrawLayer"
 };
 
 export default state;
