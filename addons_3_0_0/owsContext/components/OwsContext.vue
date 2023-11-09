@@ -80,6 +80,8 @@ export default {
                 const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
                 const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
                 const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
+                const getFeatureInfoOperation = l.offerings[0].operations.find(o => o.code === "GetFeatureInfo");
+                const crs = mapCollection.getMapView("2D").getProjection().getCode();
 
                 if (!getMapUrl) {
                     // generate an empty folder if no getMap operation is specified
@@ -118,11 +120,14 @@ export default {
                     transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
                     transparent: true,
                     urlIsVisible: true,
+                    featureCount: "1",
                     minScale: l.properties?.minScaleDenominator,
                     maxScale: l.properties?.maxScaleDenominator,
                     type: "layer",
-                    gfiAttributes: "showAll",
+                    crs: crs,
+                    gfiAttributes: getFeatureInfoOperation ? "showAll" : "ignore",
                     gfiTheme: "default",
+                    infoFormat: getFeatureInfoOperation?.type,
                     layerAttribution: "nicht vorhanden",
                     showInLayerTree: true,
                     folder: l.properties.folder,
