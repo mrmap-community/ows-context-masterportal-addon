@@ -20,8 +20,8 @@ export default {
     data () {
         return {
             // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json",
-            // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json",
-            owcUrl: "/portal/demo/resources/examples/wmc.json",
+            owcUrl: "/portal/demo/resources/examples/wmc_metadata.json",
+            // owcUrl: "/portal/demo/resources/examples/wmc.json",
             kmlLayers: []
         };
     },
@@ -108,13 +108,15 @@ export default {
                     // const parser = new DOMParser();
                     // const xml = parser.parseFromString(metadataResponse, "application/xml");
                 }
+                const mapParam = getMapUrl.searchParams.get("map");
+                const mapServerParam = mapParam ? `?map=${mapParam}` : "";
 
                 return {
                     id: `ows-${uniqueId()}`,
                     name: l.properties.title,
                     typ: "WMS",
                     layers: getMapUrl?.searchParams.get("LAYERS"),
-                    url: getMapUrl ? `${getMapUrl?.origin}${getMapUrl?.pathname}` : `${getCapabilitiesUrl?.origin}${getCapabilitiesUrl?.pathname}`,
+                    url: getMapUrl ? `${getMapUrl?.origin}${getMapUrl?.pathname}${mapServerParam}` : `${getCapabilitiesUrl?.origin}${getCapabilitiesUrl?.pathname}`,
                     version: getMapUrl?.searchParams.get("VERSION"),
                     visibility: l.properties?.active ?? getMapOperation?.extension?.active ?? false,
                     transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
