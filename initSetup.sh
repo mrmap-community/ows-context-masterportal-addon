@@ -5,7 +5,7 @@ set -e
 
 #nvm use v18
 
-GIT_COMMIT=f2238c2db198e95412101e491c0924c8949ae576
+GIT_COMMIT=e4f81fc874efb7b6297c3684f6a32bdc5f8dfc81
 
 
 if [ ! -d "masterportal-code" ]; then
