@@ -127,7 +127,6 @@ export default {
                             md_id: undefined,
                             customMetadata: true,
                             csw_url: metadataUrl,
-                            show_doc_url: "https://google.de",
                             md_name: l.properties.title
                         }
                     ]
