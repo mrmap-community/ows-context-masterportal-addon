@@ -93,21 +93,7 @@ export default {
                     };
                 }
 
-                let metadataId;
-                let metadataUrl;
-
-                if (l.properties?.resourceMetadata) {
-                    // fetch metadata
-                    const mdUrl = new URL(l.properties?.resourceMetadata);
-
-                    metadataId = mdUrl.searchParams.get("id");
-                    metadataUrl = `${mdUrl.origin}${mdUrl.pathname}?`;
-
-                    // todo: metadata needs CORS headers
-                    // const metadataResponse = await fetch(mdUrl);
-                    // const parser = new DOMParser();
-                    // const xml = parser.parseFromString(metadataResponse, "application/xml");
-                }
+                const metadataUrl = l.properties?.resourceMetadata;
                 const mapParam = getMapUrl.searchParams.get("map");
                 const mapServerParam = mapParam ? `?map=${mapParam}` : "";
 
@@ -138,16 +124,11 @@ export default {
                     cache: false, // check which attributes are necessary
                     datasets: metadataUrl && [
                         {
-                            md_id: metadataId,
+                            md_id: undefined,
+                            customMetadata: true,
                             csw_url: metadataUrl,
-                            // show_doc_url: "https://metaver.de/trefferanzeige?cmd=doShowDocument&docuuid=",
-                            // bbox: "461468.96892897453,5916367.229806512,587010.9095989474,5980347.755797674",
-                            // rs_id: "https://registry.gdi-de.org/id/de.hh/d1c21e8d-f36d-4d15-8da5-b6bfc7adad4b",
+                            show_doc_url: "https://google.de",
                             md_name: l.properties.title
-                            // md_name: "Verkehrslage auf Autobahnen (Schleifen) Hamburg",
-                            // kategorie_opendata: ["Verkehr"], // todo: handle categories
-                            // kategorie_inspire: ["Verkehrsnetze"],
-                            // kategorie_organisation: "Behörde für Verkehr und Mobilitätswende (BVM)"
                         }
                     ]
                 };
