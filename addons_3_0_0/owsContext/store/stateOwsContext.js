@@ -9,7 +9,8 @@ const state = {
     useConfigName: true,
     parentId: true,
     layerObjects: undefined,
-    layerId: "importDrawLayer"
+    layerId: "importDrawLayer",
+    kmlLayers: []
 };
 
 export default state;

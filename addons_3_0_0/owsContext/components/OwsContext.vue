@@ -1,13 +1,8 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import {isProxy, toRaw} from "vue";
 import getters from "../store/gettersOwsContext";
 import mutations from "../store/mutationsOwsContext";
 import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components/LightButton.vue";
-import {uniqueId} from "../../../../src_3_0_0/shared/js/utils/uniqueId.js";
-import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
-import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
-import {transformExtent} from "ol/proj";
 
 /**
  * @module modules/OwsContext
@@ -53,7 +48,8 @@ export default {
         ]),
         ...mapActions("Modules/OwsContext", [
             "modifyPortalConfig",
-            "addLayerConfigWithName"
+            "addLayerConfigWithName",
+            "parseContext"
         ]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
@@ -65,219 +61,8 @@ export default {
             "setBaselayerIds",
             "setTopBaselayerId"
         ]),
-        addKmlLayer: async function (kmlConfig) {
-            this.modifyPortalConfig();
-            const kml = await this.addLayerConfigWithName(kmlConfig.properties?.title);
-
-            if (kml) {
-                await this.importKML({raw: kmlConfig.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"});
-            }
-        },
-        getMasterPortalConfigFromOwc: function (l) {
-            // todo: the structure will change in the future: offerings will be a child of properties
-            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
-                const getMapOperation = l.offerings[0].operations.find(o => o.code === "GetMap");
-                const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
-                const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
-                const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
-                const getFeatureInfoOperation = l.offerings[0].operations.find(o => o.code === "GetFeatureInfo");
-                const crs = mapCollection.getMapView("2D").getProjection().getCode();
-
-                if (!getMapUrl) {
-                    // generate an empty folder if no getMap operation is specified
-                    return {
-                        id: `ows-${uniqueId()}`,
-                        name: l.properties.title,
-                        folder: l.properties.folder,
-                        type: "folder"
-                    };
-                }
-
-                const metadataUrl = l.properties?.resourceMetadata;
-                const mapParam = getMapUrl.searchParams.get("map");
-                const mapServerParam = mapParam ? `?map=${mapParam}` : "";
-
-                return {
-                    id: `ows-wms-${uniqueId()}`,
-                    name: l.properties.title,
-                    typ: "WMS",
-                    layers: getMapUrl?.searchParams.get("LAYERS"),
-                    url: getMapUrl ? `${getMapUrl?.origin}${getMapUrl?.pathname}${mapServerParam}` : `${getCapabilitiesUrl?.origin}${getCapabilitiesUrl?.pathname}`,
-                    version: getMapUrl?.searchParams.get("VERSION"),
-                    visibility: l.properties?.active ?? getMapOperation?.extension?.active ?? false,
-                    transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : 0,
-                    transparent: true,
-                    urlIsVisible: true,
-                    featureCount: "1",
-                    minScale: l.properties?.minScaleDenominator,
-                    maxScale: l.properties?.maxScaleDenominator,
-                    type: "layer",
-                    crs: crs,
-                    gfiAttributes: getFeatureInfoOperation ? "showAll" : "ignore",
-                    gfiTheme: "default",
-                    infoFormat: getFeatureInfoOperation?.type,
-                    layerAttribution: "nicht vorhanden",
-                    showInLayerTree: l.properties?.active ?? getMapOperation?.extension?.active ?? false,
-                    folder: l.properties.folder,
-                    notSupportedFor3DNeu: false,
-                    singleTile: true, // forces single tiles to prevent performance issues
-                    cache: false, // check which attributes are necessary
-                    datasets: metadataUrl && [
-                        {
-                            md_id: undefined,
-                            customMetadata: true,
-                            csw_url: metadataUrl,
-                            md_name: l.properties.title
-                        }
-                    ]
-                };
-            }
-            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wmts") {
-                const getCapabilitiesOperation = l.offerings[0].operations.find(o => o.code === "GetCapabilities");
-                const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
-
-                if (!getCapabilitiesUrl) {
-                    return false;
-                }
-
-                return {
-                    id: `ows-wmts-${uniqueId()}`,
-                    name: l.properties.title,
-                    typ: "WMTS",
-                    visibility: l.properties?.active,
-                    transparency: l.properties?.extension?.opacity ? 100 - (l.properties?.extension?.opacity * 100) : undefined,
-                    capabilitiesUrl: getCapabilitiesOperation?.href,
-                    layers: l.properties?.extension?.layers, // todo: add extension for layer parameter
-                    optionsFromCapabilities: true,
-                    showInLayerTree: l.properties?.active ?? false,
-                    folder: l.properties.folder,
-                    baselayer: false
-                };
-            }
-            if (l.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
-                this.kmlLayers.push(l);
-            }
-            return false;
-        },
-        getFolderConfigs: function (owcList, level) {
-            const subFolders = owcList.filter(owc => owc.properties?.folder?.split("/").length === level + 1);
-
-            const subLeafs = owcList.filter(owc => owc.properties?.folder?.split("/").length === level);
-
-            const isLeafNode = subFolders.length === 0;
-
-            const children = [];
-
-            if (isLeafNode) {
-                return owcList.map(this.getMasterPortalConfigFromOwc);
-            }
-            else if (subLeafs?.length > 0) {
-                children.push(...subLeafs.map(this.getMasterPortalConfigFromOwc));
-            }
-
-            children.push(...subFolders.map((owcFolder) => {
-                const folder = owcFolder.properties?.folder;
-                const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
-
-                return {
-                    name: folder,
-                    id: `layer-${uniqueId()}`,
-                    showInLayerTree: false,
-                    type: "folder",
-                    folder: folder,
-                    elements: folder && this.getFolderConfigs(subElements, level + 1, folder)
-                };
-            }));
-
-            return children;
-        },
-        parseContext: async function () {
-            const response = await fetch(this.owcUrl, {});
-
-            if (!response.ok) {
-                this.addSingleAlert({
-                    category: "error",
-                    content: "Could not parse OWS Context"
-                });
-            }
-
-            const context = await response.json();
-
-            // fetch meta data
-            const metadataUrlIso = context.properties.contextMetadata?.find(link => link.indexOf("iso19139") !== -1);
-            const metadataUrl = context.properties.contextMetadata;
-
-            if (metadataUrlIso) {
-                // commented-out because metadata urls have to enable CORS
-                // todo: fetch metadata (needs example)
-                // const metadataResponse = await fetch(metadataUrl);
-                // const parser = new DOMParser();
-                // const xml = parser.parseFromString(metadataResponse, "application/xml");
-                // todo: get logo from metadata and update mainMenu.logo below
-            }
-
-            // set bbox (from ows context extension)
-            const crs = mapCollection.getMapView("2D").getProjection().getCode();
-
-            if (context.properties.extension) {
-                const extension = context.properties.extension[0].projections.find(p => p.code === crs);
-
-                this.zoomToExtent({extent: extension.bbox});
-            }
-            else {
-                const bbox = context.properties.bbox;
-                const transformedBbox = transformExtent(bbox, "EPSG:4326", crs);
-
-                this.zoomToExtent({extent: transformedBbox});
-            }
-
-            // set the application title
-            const modifiedMenu = {
-                ...this.mainMenu,
-                title: {
-                    ...this.mainMenu.title,
-                    link: metadataUrl,
-                    logo: "",
-                    text: context.properties?.title ?? "Unnamed OWS Context",
-                    tooltip: context.properties?.title ?? "Unnamed OWS Context"
-                }
-            };
-
-            this.setMainMenu(modifiedMenu);
-
-            const owcLayers = context.features;
-
-            const tree = this.getFolderConfigs(owcLayers, 1);
-
-            const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
-
-            const newConfig = {
-                [portalConfigKey]: portalConfigNoProxy,
-                [treeTopicConfigKey]: {
-                    [treeBaselayersKey]: {
-                        elements: []
-                    },
-                    [treeSubjectsKey]: {
-                        elements: tree
-                    }
-                }
-            };
-
-            layerCollection.clear();
-
-            await this.setPortalConfig(newConfig, {root: true});
-            Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
-                this.setLayerConfigByParentKey({layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
-            });
-
-            for (let i = 0; i < this.kmlLayers.length; i++) {
-                const kmlLayer = this.kmlLayers[i];
-
-                await this.addKmlLayer(kmlLayer);
-            }
-
-            // remove import alerts
-            this.cleanup();
+        parseContextAction: async function () {
+            await this.parseContext(this.owcUrl);
         }
     }
 };
@@ -296,7 +81,7 @@ export default {
         >
         <LightButton
             id="owsButton"
-            :interaction="parseContext"
+            :interaction="parseContextAction"
             text="Parse OWS Context"
             icon="bi-alipay"
             customclass="w-100 justify-content-start"
