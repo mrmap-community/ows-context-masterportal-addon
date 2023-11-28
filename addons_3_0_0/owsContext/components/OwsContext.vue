@@ -98,7 +98,7 @@ export default {
                 const mapServerParam = mapParam ? `?map=${mapParam}` : "";
 
                 return {
-                    id: `ows-${uniqueId()}`,
+                    id: `ows-wms-${uniqueId()}`,
                     name: l.properties.title,
                     typ: "WMS",
                     layers: getMapUrl?.searchParams.get("LAYERS"),
@@ -117,7 +117,7 @@ export default {
                     gfiTheme: "default",
                     infoFormat: getFeatureInfoOperation?.type,
                     layerAttribution: "nicht vorhanden",
-                    showInLayerTree: true,
+                    showInLayerTree: l.properties?.active ?? getMapOperation?.extension?.active ?? false,
                     folder: l.properties.folder,
                     notSupportedFor3DNeu: false,
                     singleTile: true, // forces single tiles to prevent performance issues
@@ -141,7 +141,7 @@ export default {
                 }
 
                 return {
-                    id: l.properties.title,
+                    id: `ows-wmts-${uniqueId()}`,
                     name: l.properties.title,
                     typ: "WMTS",
                     visibility: l.properties?.active,
@@ -149,7 +149,7 @@ export default {
                     capabilitiesUrl: getCapabilitiesOperation?.href,
                     layers: l.properties?.extension?.layers, // todo: add extension for layer parameter
                     optionsFromCapabilities: true,
-                    showInLayerTree: true,
+                    showInLayerTree: l.properties?.active ?? false,
                     folder: l.properties.folder,
                     baselayer: false
                 };
@@ -161,22 +161,35 @@ export default {
         },
         getFolderConfigs: function (owcList, level) {
             const subFolders = owcList.filter(owc => owc.properties?.folder?.split("/").length === level + 1);
+
+            const subLeafs = owcList.filter(owc => owc.properties?.folder?.split("/").length === level);
+
             const isLeafNode = subFolders.length === 0;
+
+            const children = [];
 
             if (isLeafNode) {
                 return owcList.map(this.getMasterPortalConfigFromOwc);
             }
+            else if (subLeafs?.length > 0) {
+                children.push(...subLeafs.map(this.getMasterPortalConfigFromOwc));
+            }
 
-            return subFolders.map((owcFolder) => {
+            children.push(...subFolders.map((owcFolder) => {
                 const folder = owcFolder.properties?.folder;
                 const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
 
                 return {
-                    name: owcFolder.properties.title ?? owcFolder.properties.folder,
-                    type: owcFolder.properties.folder ? "folder" : undefined,
-                    elements: folder && this.getFolderConfigs(subElements, level + 1)
+                    name: folder,
+                    id: `layer-${uniqueId()}`,
+                    showInLayerTree: false,
+                    type: "folder",
+                    folder: folder,
+                    elements: folder && this.getFolderConfigs(subElements, level + 1, folder)
                 };
-            });
+            }));
+
+            return children;
         },
         parseContext: async function () {
             const response = await fetch(this.owcUrl, {});
@@ -256,8 +269,6 @@ export default {
             Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
                 this.setLayerConfigByParentKey({layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
             });
-
-            this.extendLayers(null, {root: true});
 
             for (let i = 0; i < this.kmlLayers.length; i++) {
                 const kmlLayer = this.kmlLayers[i];
