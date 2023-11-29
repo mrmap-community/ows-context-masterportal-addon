@@ -1,5 +1,5 @@
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
-import {treeSubjectsKey, treeTopicConfigKey} from "../../../../src_3_0_0/shared/js/utils/constants";
+import {treeTopicConfigKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 import {uniqueId} from "../../../../src_3_0_0/shared/js/utils/uniqueId.js";
 
 const actions = {
@@ -51,8 +51,13 @@ const actions = {
             const mapParam = getMapUrl.searchParams.get("map");
             const mapServerParam = mapParam ? `?map=${mapParam}` : "";
 
+            const id = uniqueId();
+
             return {
-                id: `ows-wms-${uniqueId()}`,
+                // todo: set sequence to fix layer order
+                // id: `ows-wms-${uniqueId()}`,
+                id: id,
+                layerSequence: id,
                 name: layer.properties.title,
                 typ: "WMS",
                 layers: getMapUrl?.searchParams.get("LAYERS"),
@@ -139,16 +144,21 @@ const actions = {
         else if (subLeafs?.length > 0) {
             const promises = subLeafs.map(async (sl) => dispatch("getMasterPortalConfigFromOwc", sl));
 
-            childPromises.push(promises);
+            childPromises.push(...promises);
         }
 
         childPromises.push(...subFolders.map(async (owcFolder) => {
             const folder = owcFolder.properties?.folder;
             const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
 
+            const id = uniqueId();
+
             return {
                 name: folder,
-                id: `layer-${uniqueId()}`,
+                // id: owcFolder.properties.uid ?? `layer-${uniqueId()}`,
+                // todo: static is is needed to add layer by parentKey
+                // id: `layer-${uniqueId()}`,
+                id: id,
                 showInLayerTree: false,
                 type: "folder",
                 folder: folder,
@@ -166,9 +176,10 @@ const actions = {
      * @param {Object} param.dispatch the dispatch
      * @param {Object} param.state the state
      * @param {Object} name the name
+     * @param {Object} parentKey the Parent-Key
      * @returns {ol/layer} The created layer.
      */
-    async addLayerConfigWithName ({dispatch, state}, name) {
+    async addLayerConfigWithName ({dispatch, state}, {name, parentKey}) {
         if (!layerCollection.getLayerById(state.layerId)) {
             await dispatch("addLayerToLayerConfig", {
                 layerConfig: {
@@ -177,9 +188,10 @@ const actions = {
                     showInLayerTree: true,
                     typ: "VECTORBASE",
                     type: "layer",
-                    visibility: true
+                    visibility: true,
+                    // layerSequence: 1 // adds layer at first position
                 },
-                parentKey: treeSubjectsKey
+                parentKey: parentKey
             }, {root: true});
         }
 
@@ -194,7 +206,9 @@ const actions = {
      * @returns {ol/layer} The created layer.
      */
     async addKmlLayer ({dispatch}, kmlConfig) {
-        const kml = await dispatch("addLayerConfigWithName", kmlConfig.properties?.title);
+        const parentKey = kmlConfig.properties.folder;
+
+        const kml = await dispatch("addLayerConfigWithName", {name: kmlConfig.properties?.title, parentKey: kmlConfig.properties.folder});
 
         if (kml) {
             await dispatch("Modules/FileImport/importKML", {raw: kmlConfig.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"}, {root: true});

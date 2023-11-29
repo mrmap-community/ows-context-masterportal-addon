@@ -3,9 +3,8 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import getters from "../store/gettersOwsContext";
 import mutations from "../store/mutationsOwsContext";
 import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components/LightButton.vue";
-import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
+import {treeSubjectsKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 import {transformExtent} from "ol/proj";
-import {isProxy, toRaw} from "vue";
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
 
 /**
@@ -34,8 +33,6 @@ export default {
             "mainMenu"
         ])
     },
-    watch: {
-    },
     methods: {
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
         ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
@@ -57,7 +54,7 @@ export default {
         ]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
-        ...mapMutations(["setPortalConfig"]),
+        ...mapMutations(["setPortalConfig", "setLayerConfig"]),
         ...mapMutations("Modules/OpenConfig", ["setLayerConfigByParentKey"]),
         ...mapMutations("Menu", ["setMainMenu"]),
         ...mapMutations("Modules/BaselayerSwitcher", [
@@ -122,25 +119,23 @@ export default {
 
             const tree = await this.getFolderConfigs({owcList: owcLayers, level: 1});
 
-            const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
+            console.log('tree', tree);
 
-            const newConfig = {
-                [portalConfigKey]: portalConfigNoProxy,
-                [treeTopicConfigKey]: {
-                    [treeBaselayersKey]: {
-                        elements: []
-                    },
-                    [treeSubjectsKey]: {
-                        elements: tree
-                    }
+            const layerConfig = {
+                [treeBaselayersKey]: {
+                    elements: []
+                },
+                [treeSubjectsKey]: {
+                    elements: tree
                 }
             };
 
             layerCollection.clear();
 
-            this.setPortalConfig(newConfig, {root: true});
-            Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
-                this.setLayerConfigByParentKey({layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
+            this.setLayerConfig(layerConfig, {root: true});
+
+            Object.keys(layerConfig).forEach(topic => {
+                this.setLayerConfigByParentKey({layerConfigs: layerConfig[topic], parentKey: topic}, {root: true});
             });
 
             for (let i = 0; i < this.kmlLayers.length; i++) {

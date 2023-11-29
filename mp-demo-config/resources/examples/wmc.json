@@ -192,7 +192,8 @@
         },
         "minScaleDenominator": 0,
         "maxScaleDenominator": 0,
-        "folder": "/0"
+        "folder": "/0",
+        "uid": "123456"
       }
     },
     {
