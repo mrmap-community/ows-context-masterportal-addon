@@ -3,6 +3,10 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import getters from "../store/gettersOwsContext";
 import mutations from "../store/mutationsOwsContext";
 import LightButton from "../../../../src_3_0_0/shared/modules/buttons/components/LightButton.vue";
+import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
+import {transformExtent} from "ol/proj";
+import {isProxy, toRaw} from "vue";
+import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
 
 /**
  * @module modules/OwsContext
@@ -14,10 +18,9 @@ export default {
     },
     data () {
         return {
-            // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json",
-            owcUrl: "/portal/demo/resources/examples/wmc_metadata.json",
-            // owcUrl: "/portal/demo/resources/examples/wmc.json",
-            kmlLayers: []
+            // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json"
+            // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json"
+            owcUrl: "/portal/demo/resources/examples/wmc.json"
         };
     },
     computed: {
@@ -49,7 +52,8 @@ export default {
         ...mapActions("Modules/OwsContext", [
             "modifyPortalConfig",
             "addLayerConfigWithName",
-            "parseContext"
+            "getFolderConfigs",
+            "addKmlLayer"
         ]),
         ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
@@ -61,8 +65,92 @@ export default {
             "setBaselayerIds",
             "setTopBaselayerId"
         ]),
-        parseContextAction: async function () {
-            await this.parseContext(this.owcUrl);
+        parseContext: async function () {
+            const response = await fetch(this.owcUrl, {});
+
+            if (!response.ok) {
+                this.addSingleAlert({
+                    category: "error",
+                    content: "Could not parse OWS Context"
+                });
+            }
+
+            const context = await response.json();
+
+            // fetch meta data
+            const metadataUrlIso = context.properties.contextMetadata?.find(link => link.indexOf("iso19139") !== -1);
+            const metadataUrl = context.properties.contextMetadata;
+
+            if (metadataUrlIso) {
+                // commented-out because metadata urls have to enable CORS
+                // todo: fetch metadata (needs example)
+                // const metadataResponse = await fetch(metadataUrl);
+                // const parser = new DOMParser();
+                // const xml = parser.parseFromString(metadataResponse, "application/xml");
+                // todo: get logo from metadata and update mainMenu.logo below
+            }
+
+            // set bbox (from ows context extension)
+            const crs = mapCollection.getMapView("2D").getProjection().getCode();
+
+            if (context.properties.extension) {
+                const extension = context.properties.extension[0].projections.find(p => p.code === crs);
+
+                this.zoomToExtent({extent: extension.bbox});
+            }
+            else {
+                const bbox = context.properties.bbox;
+                const transformedBbox = transformExtent(bbox, "EPSG:4326", crs);
+
+                this.zoomToExtent({extent: transformedBbox});
+            }
+
+            // set the application title
+            const modifiedMenu = {
+                ...this.mainMenu,
+                title: {
+                    link: metadataUrl,
+                    logo: "",
+                    text: context.properties?.title ?? "Unnamed OWS Context",
+                    tooltip: context.properties?.title ?? "Unnamed OWS Context"
+                }
+            };
+
+            this.setMainMenu(modifiedMenu);
+
+            const owcLayers = context.features;
+
+            const tree = await this.getFolderConfigs({owcList: owcLayers, level: 1});
+
+            const portalConfigNoProxy = isProxy(this.portalConfig) ? toRaw(this.portalConfig) : this.portalConfig;
+
+            const newConfig = {
+                [portalConfigKey]: portalConfigNoProxy,
+                [treeTopicConfigKey]: {
+                    [treeBaselayersKey]: {
+                        elements: []
+                    },
+                    [treeSubjectsKey]: {
+                        elements: tree
+                    }
+                }
+            };
+
+            layerCollection.clear();
+
+            this.setPortalConfig(newConfig, {root: true});
+            Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
+                this.setLayerConfigByParentKey({layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
+            });
+
+            for (let i = 0; i < this.kmlLayers.length; i++) {
+                const kmlLayer = this.kmlLayers[i];
+
+                await this.addKmlLayer(kmlLayer);
+            }
+
+            // remove import alerts
+            this.cleanup();
         }
     }
 };
@@ -81,7 +169,7 @@ export default {
         >
         <LightButton
             id="owsButton"
-            :interaction="parseContextAction"
+            :interaction="parseContext"
             text="Parse OWS Context"
             icon="bi-alipay"
             customclass="w-100 justify-content-start"

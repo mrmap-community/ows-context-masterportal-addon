@@ -1,8 +1,6 @@
 import layerCollection from "../../../../src_3_0_0/core/layers/js/layerCollection";
-import {treeSubjectsKey, treeTopicConfigKey, portalConfigKey, treeBaselayersKey} from "../../../../src_3_0_0/shared/js/utils/constants";
-import {transformExtent} from "ol/proj";
+import {treeSubjectsKey, treeTopicConfigKey} from "../../../../src_3_0_0/shared/js/utils/constants";
 import {uniqueId} from "../../../../src_3_0_0/shared/js/utils/uniqueId.js";
-import {isProxy, toRaw} from "vue";
 
 const actions = {
 
@@ -12,11 +10,14 @@ const actions = {
      * @param {Progressevent} newConfig The portal config.
      * @returns {void}
      */
-    modifyPortalConfig ({commit}, newConfig) {
-        commit("setPortalConfig", newConfig, {root: true});
+    async modifyPortalConfig ({commit}, newConfig) {
+        return new Promise((resolve) => {
+            commit("setPortalConfig", newConfig, {root: true});
 
-        Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
-            commit("setLayerConfigByParentKey", {layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
+            Object.keys(newConfig[treeTopicConfigKey]).forEach(topic => {
+                commit("setLayerConfigByParentKey", {layerConfigs: newConfig[treeTopicConfigKey][topic], parentKey: topic}, {root: true});
+            });
+            resolve();
         });
     },
 
@@ -110,7 +111,7 @@ const actions = {
         if (layer.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
             commit("setKmlLayers", [layer, ...state.kmlLayers]);
         }
-        return false;
+        return Promise.reject();
     },
 
     /**
@@ -127,18 +128,21 @@ const actions = {
 
         const isLeafNode = subFolders.length === 0;
 
-        const children = [];
+        const childPromises = [];
 
         if (isLeafNode) {
-            // todo: fix promise issues
-            return owcList.map(this.getMasterPortalConfigFromOwc);
+            const promises = owcList.map(async (l) => dispatch("getMasterPortalConfigFromOwc", l));
+            const settled = await Promise.allSettled(promises);
+
+            return settled.filter(c => c.status === "fulfilled").map(c => c.value);
         }
         else if (subLeafs?.length > 0) {
+            const promises = subLeafs.map(async (sl) => dispatch("getMasterPortalConfigFromOwc", sl));
 
-            children.push(...subLeafs.map(this.getMasterPortalConfigFromOwc));
+            childPromises.push(promises);
         }
 
-        children.push(...subFolders.map(async (owcFolder) => {
+        childPromises.push(...subFolders.map(async (owcFolder) => {
             const folder = owcFolder.properties?.folder;
             const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
 
@@ -148,105 +152,13 @@ const actions = {
                 showInLayerTree: false,
                 type: "folder",
                 folder: folder,
-                // elements: folder && this.getFolderConfigs(subElements, level + 1, folder)
                 elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1})
             };
         }));
 
-        return children;
-    },
+        const children = await Promise.allSettled(childPromises);
 
-    /**
-     * Parses ows context.
-     * @param {Object} param.commit the commit
-     * @param {Progressevent} owcUrl The context url.
-     * @returns {void}
-     */
-    async parseContext ({commit, dispatch, state, rootState}, owcUrl) {
-        const response = await fetch(owcUrl, {});
-
-        if (!response.ok) {
-            await dispatch("Alerting/addSingleAlert", {
-                category: "error",
-                content: "Could not parse OWS Context"
-            }, {root: true});
-        }
-
-        const context = await response.json();
-
-        // fetch meta data
-        const metadataUrlIso = context.properties.contextMetadata?.find(link => link.indexOf("iso19139") !== -1);
-        const metadataUrl = context.properties.contextMetadata;
-
-        if (metadataUrlIso) {
-            // commented-out because metadata urls have to enable CORS
-            // todo: fetch metadata (needs example)
-            // const metadataResponse = await fetch(metadataUrl);
-            // const parser = new DOMParser();
-            // const xml = parser.parseFromString(metadataResponse, "application/xml");
-            // todo: get logo from metadata and update mainMenu.logo below
-        }
-
-        // set bbox (from ows context extension)
-        const crs = mapCollection.getMapView("2D").getProjection().getCode();
-
-        if (context.properties.extension) {
-            const extension = context.properties.extension[0].projections.find(p => p.code === crs);
-
-            await dispatch("Maps/zoomToExtent", {extent: extension.bbox}, {root: true});
-        }
-        else {
-            const bbox = context.properties.bbox;
-            const transformedBbox = transformExtent(bbox, "EPSG:4326", crs);
-
-            await dispatch("Maps/zoomToExtent", {extent: transformedBbox}, {root: true});
-        }
-
-        // set the application title
-        const modifiedMenu = {
-            ...rootState.portalConfig.mainMenu,
-            title: {
-                ...rootState.portalConfig.mainMenu.title,
-                link: metadataUrl,
-                logo: "",
-                text: context.properties?.title ?? "Unnamed OWS Context",
-                tooltip: context.properties?.title ?? "Unnamed OWS Context"
-            }
-        };
-
-        commit("Menu/setMainMenu", modifiedMenu, {root: true});
-
-        const owcLayers = context.features;
-
-        const tree = await dispatch("getFolderConfigs", {owcList: owcLayers, level: 1});
-
-        console.log('tree', tree);
-
-        const portalConfigNoProxy = isProxy(rootState.portalConfig) ? toRaw(rootState.portalConfig) : rootState.portalConfig;
-
-        const newConfig = {
-            [portalConfigKey]: portalConfigNoProxy,
-            [treeTopicConfigKey]: {
-                [treeBaselayersKey]: {
-                    elements: []
-                },
-                [treeSubjectsKey]: {
-                    elements: tree
-                }
-            }
-        };
-
-        await dispatch("modifyPortalConfig", newConfig);
-
-        // kml import
-        for (let i = 0; i < state.kmlLayers.length; i++) {
-            const kmlLayer = state.kmlLayers[i];
-
-            await dispatch("addKmlLayer", kmlLayer);
-        }
-
-        // remove import alerts
-        await dispatch("Alerting/cleanup", "", {root: true});
+        return children.filter(c => c.status === "fulfilled").map(c => c.value);
     },
 
     /**
