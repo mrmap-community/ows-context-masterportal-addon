@@ -34,6 +34,7 @@ export default {
         ])
     },
     methods: {
+        // todo: remove unused actions / mutations
         ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
         ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
@@ -132,8 +133,6 @@ export default {
 
             layerCollection.clear();
 
-            this.setLayerConfig(layerConfig, {root: true});
-
             Object.keys(layerConfig).forEach(topic => {
                 this.setLayerConfigByParentKey({layerConfigs: layerConfig[topic], parentKey: topic}, {root: true});
             });
@@ -144,7 +143,8 @@ export default {
                 await this.addKmlLayer(kmlLayer);
             }
 
-            // remove import alerts
+            // removes import alert
+            // todo: the message still shows up if another alert is opened
             this.cleanup();
         }
     }

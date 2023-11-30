@@ -149,17 +149,15 @@ const actions = {
 
         childPromises.push(...subFolders.map(async (owcFolder) => {
             const folder = owcFolder.properties?.folder;
-            const subElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder));
 
-            const id = uniqueId();
+            const subFolderElements = owcList.filter(owc => owc.properties?.folder?.startsWith(owcFolder.properties.folder + "/"));
+            const subLayerElements = owcList.filter(owc => owc.properties?.folder === owcFolder.properties.folder);
+
+            const subElements = [...subFolderElements, ...subLayerElements];
 
             return {
                 name: folder,
-                // id: owcFolder.properties.uid ?? `layer-${uniqueId()}`,
-                // todo: static is is needed to add layer by parentKey
-                // id: `layer-${uniqueId()}`,
-                id: id,
-                showInLayerTree: false,
+                id: folder, // this allows us to add the kml layer to a specific folder
                 type: "folder",
                 folder: folder,
                 elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1})
@@ -207,6 +205,7 @@ const actions = {
      */
     async addKmlLayer ({dispatch}, kmlConfig) {
         const parentKey = kmlConfig.properties.folder;
+        console.log('parentKey', parentKey)
 
         const kml = await dispatch("addLayerConfigWithName", {name: kmlConfig.properties?.title, parentKey: kmlConfig.properties.folder});
 
