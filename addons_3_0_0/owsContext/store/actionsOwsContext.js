@@ -29,12 +29,12 @@ const actions = {
      */
     async getMasterPortalConfigFromOwc ({commit, state}, layer) {
         // todo: the structure will change in the future: offerings will be a child of properties
-        if (layer.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
-            const getMapOperation = layer.offerings[0].operations.find(o => o.code === "GetMap");
+        if (layer.properties.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
+            const getMapOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetMap");
             const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
-            const getCapabilitiesOperation = layer.offerings[0].operations.find(o => o.code === "GetCapabilities");
+            const getCapabilitiesOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetCapabilities");
             const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
-            const getFeatureInfoOperation = layer.offerings[0].operations.find(o => o.code === "GetFeatureInfo");
+            const getFeatureInfoOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetFeatureInfo");
             const crs = mapCollection.getMapView("2D").getProjection().getCode();
 
             if (!getMapUrl) {
@@ -91,8 +91,8 @@ const actions = {
                 ]
             };
         }
-        if (layer.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wmts") {
-            const getCapabilitiesOperation = layer.offerings[0].operations.find(o => o.code === "GetCapabilities");
+        if (layer.properties.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wmts") {
+            const getCapabilitiesOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetCapabilities");
             const getCapabilitiesUrl = getCapabilitiesOperation?.href && new URL(getCapabilitiesOperation?.href);
 
             if (!getCapabilitiesUrl) {
@@ -113,7 +113,7 @@ const actions = {
                 baselayer: false
             };
         }
-        if (layer.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
+        if (layer.properties.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml") {
             commit("setKmlLayers", [layer, ...state.kmlLayers]);
         }
         return Promise.reject();
@@ -211,7 +211,7 @@ const actions = {
         const kml = await dispatch("addLayerConfigWithName", {name: kmlConfig.properties?.title, parentKey: kmlConfig.properties.folder});
 
         if (kml) {
-            await dispatch("Modules/FileImport/importKML", {raw: kmlConfig.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"}, {root: true});
+            await dispatch("Modules/FileImport/importKML", {raw: kmlConfig.properties.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"}, {root: true});
         }
     }
 
