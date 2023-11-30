@@ -120,8 +120,6 @@ export default {
 
             const tree = await this.getFolderConfigs({owcList: owcLayers, level: 1});
 
-            console.log('tree', tree);
-
             const layerConfig = {
                 [treeBaselayersKey]: {
                     elements: []
@@ -136,6 +134,7 @@ export default {
             Object.keys(layerConfig).forEach(topic => {
                 this.setLayerConfigByParentKey({layerConfigs: layerConfig[topic], parentKey: topic}, {root: true});
             });
+            this.extendLayers();
 
             for (let i = 0; i < this.kmlLayers.length; i++) {
                 const kmlLayer = this.kmlLayers[i];
