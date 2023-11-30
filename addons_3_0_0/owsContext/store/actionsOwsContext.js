@@ -40,7 +40,7 @@ const actions = {
             if (!getMapUrl) {
                 // generate an empty folder if no getMap operation is specified
                 return {
-                    id: `ows-${uniqueId()}`,
+                    id: `folder-${uniqueId()}`,
                     name: layer.properties.title,
                     folder: layer.properties.folder,
                     type: "folder"
@@ -55,7 +55,6 @@ const actions = {
 
             return {
                 // todo: set sequence to fix layer order
-                // id: `ows-wms-${uniqueId()}`,
                 id: id,
                 layerSequence: id,
                 name: layer.properties.title,
@@ -154,12 +153,15 @@ const actions = {
             const subLayerElements = owcList.filter(owc => owc.properties?.folder === owcFolder.properties.folder);
 
             const subElements = [...subFolderElements, ...subLayerElements];
+            const isKmlFolder = subLayerElements.some(sle => sle.properties.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/kml");
+
+            const id = uniqueId();
 
             return {
                 name: folder,
-                id: folder, // this allows us to add the kml layer to a specific folder
+                // id: folder, // this allows us to add the kml layer to a specific folder, but breaks the layer tree
+                id: isKmlFolder ? "kmlFolder" : id,
                 type: "folder",
-                folder: folder,
                 elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1})
             };
         }));
@@ -186,8 +188,7 @@ const actions = {
                     showInLayerTree: true,
                     typ: "VECTORBASE",
                     type: "layer",
-                    visibility: true,
-                    // layerSequence: 1 // adds layer at first position
+                    visibility: true
                 },
                 parentKey: parentKey
             }, {root: true});
@@ -204,13 +205,19 @@ const actions = {
      * @returns {ol/layer} The created layer.
      */
     async addKmlLayer ({dispatch}, kmlConfig) {
-        const parentKey = kmlConfig.properties.folder;
-        console.log('parentKey', parentKey)
-
-        const kml = await dispatch("addLayerConfigWithName", {name: kmlConfig.properties?.title, parentKey: kmlConfig.properties.folder});
+        const kml = await dispatch("addLayerConfigWithName", {
+            name: kmlConfig.properties?.title,
+            parentKey: "kmlFolder"
+        });
 
         if (kml) {
-            await dispatch("Modules/FileImport/importKML", {raw: kmlConfig.properties.offerings[0].content[0].content, layer: kml.layer, filename: "test.kml"}, {root: true});
+            const layerConfig = {
+                raw: kmlConfig.properties.offerings[0].content[0].content,
+                layer: kml.layer,
+                filename: "test.kml"
+            };
+
+            await dispatch("Modules/FileImport/importKML", layerConfig, {root: true});
         }
     }
 
