@@ -18,8 +18,8 @@ export default {
     data () {
         return {
             // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json"
-            // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json"
-            owcUrl: "/portal/demo/resources/examples/wmc.json"
+            owcUrl: "/portal/demo/resources/examples/wmc_metadata.json"
+            // owcUrl: "/portal/demo/resources/examples/wmc.json"
         };
     },
     computed: {
@@ -34,35 +34,19 @@ export default {
         ])
     },
     methods: {
-        // todo: remove unused actions / mutations
-        ...mapActions("Modules/LayerTree", ["removeLayer", "replaceByIdInLayerConfig"]),
         ...mapActions("Maps", ["placingPointMarker", "zoomToExtent"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
-        ...mapActions("Modules/FileImport", [
-            "importKML",
-            "importGeoJSON",
-            "openDrawTool"
-        ]),
         ...mapActions([
-            "addLayerToLayerConfig",
             "extendLayers"
         ]),
         ...mapActions("Modules/OwsContext", [
-            "modifyPortalConfig",
-            "addLayerConfigWithName",
             "getFolderConfigs",
             "addKmlLayer"
         ]),
-        ...mapActions("Modules/BaselayerSwitcher", ["updateLayerVisibilityAndZIndex"]),
         ...mapMutations("Modules/OwsContext", Object.keys(mutations)),
         ...mapMutations(["setPortalConfig", "setLayerConfig"]),
         ...mapMutations("Modules/OpenConfig", ["setLayerConfigByParentKey"]),
         ...mapMutations("Menu", ["setMainMenu"]),
-        ...mapMutations("Modules/BaselayerSwitcher", [
-            "setActivatedExpandable",
-            "setBaselayerIds",
-            "setTopBaselayerId"
-        ]),
         parseContext: async function () {
             const response = await fetch(this.owcUrl, {});
 
