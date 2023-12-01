@@ -22,3 +22,17 @@ npm run watch:copyto ./ ../../masterportal-code/addons/addons_3_0_0/owsContext
 ```sh
 npm run watch:copyto ../../mp-demo-config ../../masterportal-code/portal/demo
 ```
+
+## Deployment
+
+External deployment repository: https://code.terrestris.de/mrmap/deployment
+
+### Steps
+
+- update submodules in deployment repo:
+
+```sh
+git submodule update --init --recursive
+```
+
+- run pipeline 
