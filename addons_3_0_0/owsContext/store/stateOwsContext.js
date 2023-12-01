@@ -10,10 +10,7 @@ const state = {
     parentId: true,
     layerObjects: undefined,
     layerId: "importDrawLayer",
-    kmlLayers: [],
-    mainMenuText: "",
-    mainMenuTooltip: "",
-    mainMenuLink: ""
+    kmlLayers: []
 };
 
 export default state;

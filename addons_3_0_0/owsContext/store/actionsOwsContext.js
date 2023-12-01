@@ -28,7 +28,6 @@ const actions = {
      * @returns {void}
      */
     async getMasterPortalConfigFromOwc ({commit, state}, layer) {
-        // todo: the structure will change in the future: offerings will be a child of properties
         if (layer.properties.offerings[0].code === "http://www.opengis.net/spec/owc-atom/1.0/req/wms") {
             const getMapOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetMap");
             const getMapUrl = getMapOperation?.href && new URL(getMapOperation?.href);
