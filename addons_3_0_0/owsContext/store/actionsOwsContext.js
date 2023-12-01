@@ -159,10 +159,10 @@ const actions = {
 
             return {
                 name: folder,
-                // id: folder, // this allows us to add the kml layer to a specific folder, but breaks the layer tree
                 id: isKmlFolder ? "kmlFolder" : id,
                 type: "folder",
-                elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1})
+                elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1}),
+                isKmlFolder: isKmlFolder
             };
         }));
 
@@ -204,10 +204,13 @@ const actions = {
      * @param {Object} kmlConfig the kml config
      * @returns {ol/layer} The created layer.
      */
-    async addKmlLayer ({dispatch}, kmlConfig) {
+    async addKmlLayer ({dispatch, rootGetters}, kmlConfig) {
+        const folders = rootGetters.allFolders;
+        const kmlFolder = folders.find(f => f.isKmlFolder);
+
         const kml = await dispatch("addLayerConfigWithName", {
             name: kmlConfig.properties?.title,
-            parentKey: "kmlFolder"
+            parentKey: kmlFolder.id
         });
 
         if (kml) {
