@@ -1,6 +1,10 @@
 # OWS Context Addon
 
-This addon gives users the possibility to import OWS Context documents into the MasterPortal. A new button "OWS Context" is added to the main menu and allows the user to submit a remote URL to a OWS Context.
+This addon gives users the possibility to import OGC OWS Context documents into the MasterPortal. A new button "OWS Context" is added to the main menu and allows the user to submit a remote URL to a OWS Context. The official documentation for OWS Context documents is available here:
+
+http://www.owscontext.org/
+
+Currently, only the GeoJSON format is supported.
 
 All visible layers are shown in a flat hierarchy within the layer tree. Additional layers can be added from the layer catalog. Here the folder structure defined in the OWS Context document is supported.
 
