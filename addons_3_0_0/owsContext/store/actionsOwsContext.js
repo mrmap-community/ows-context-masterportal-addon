@@ -37,6 +37,9 @@ const actions = {
             const getFeatureInfoOperation = layer.properties.offerings[0].operations.find(o => o.code === "GetFeatureInfo");
             const crs = mapCollection.getMapView("2D").getProjection().getCode();
 
+            // alternative: get crs from map operation
+            // const crs = getMapUrl?.searchParams.get("SRS") ?? mapCollection.getMapView("2D").getProjection().getCode();
+
             if (!getMapUrl) {
                 // generate an empty folder if no getMap operation is specified
                 return {
