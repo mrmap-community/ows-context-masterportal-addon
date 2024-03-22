@@ -19,8 +19,8 @@ export default {
         return {
             // owcUrl: "https://www.geoportal.rlp.de/mapbender/php/mod_exportWmc.php?wmcId=2506&outputFormat=json"
             // owcUrl: "/portal/demo/resources/examples/wmc.json"
-            // owcUrl: "/portal/demo/resources/examples/wmc_metadata.json"
-            owcUrl: ""
+            owcUrl: "/portal/demo/resources/examples/wmc_metadata.json"
+            // owcUrl: ""
         };
     },
     computed: {
