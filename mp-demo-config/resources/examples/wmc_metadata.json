@@ -835,7 +835,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesflaeche&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -886,7 +886,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=rlp_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -937,7 +937,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=rlp_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -988,7 +988,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=rlp_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1039,7 +1039,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=rlp_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1090,7 +1090,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Wald&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1141,7 +1141,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=wald_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1192,7 +1192,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=wald_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1243,7 +1243,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=wald_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1294,7 +1294,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=wald_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1345,7 +1345,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=wald_04&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1396,7 +1396,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Sonderkultur&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1447,7 +1447,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=sonderkultur_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1498,7 +1498,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=sonderkultur_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1549,7 +1549,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=sonderkultur_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1600,7 +1600,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=sonderkultur_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1651,7 +1651,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=sonderkultur_04&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1702,7 +1702,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Ortslage&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1753,7 +1753,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_000&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1804,7 +1804,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1855,7 +1855,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1906,7 +1906,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -1957,7 +1957,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2008,7 +2008,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ortslage_04&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2059,7 +2059,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ax_friedhof_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2110,7 +2110,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ax_friedhof_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2161,7 +2161,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Industrie&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2212,7 +2212,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=industrie_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2263,7 +2263,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=industrie_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2314,7 +2314,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=industrie_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2365,7 +2365,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=industrie_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2416,7 +2416,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=industrie_04&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2467,7 +2467,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=tagebau_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2518,7 +2518,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=tagebau_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2569,7 +2569,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Fluesse&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2620,7 +2620,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=baeche_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2671,7 +2671,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=baeche_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2722,7 +2722,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2773,7 +2773,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2824,7 +2824,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2875,7 +2875,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_03&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2926,7 +2926,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_04&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -2977,7 +2977,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_05&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3028,7 +3028,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=fluss_06&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3079,7 +3079,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Seen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3130,7 +3130,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3181,7 +3181,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3232,7 +3232,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3283,7 +3283,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3334,7 +3334,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_3&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3385,7 +3385,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_4&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3436,7 +3436,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_5&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3487,7 +3487,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=see_6&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3538,7 +3538,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Wege&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3589,7 +3589,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=weg_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3640,7 +3640,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=weg_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3691,7 +3691,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=weg_0_fuss&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3742,7 +3742,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=weg_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3793,7 +3793,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Fahrbahn&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3844,7 +3844,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=faehre&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3895,7 +3895,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Gemeindestrassen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3946,7 +3946,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Gemeindestrasse_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -3997,7 +3997,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Gemeindestrasse_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4048,7 +4048,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Kreisstrassen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4099,7 +4099,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Kreisstrasse_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4150,7 +4150,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Kreisstrasse_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4201,7 +4201,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Kreisstrasse_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4252,7 +4252,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesstrassen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4303,7 +4303,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesstrasse_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4354,7 +4354,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesstrasse_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4405,7 +4405,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesstrasse_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4456,7 +4456,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Landesstrasse_3&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4507,7 +4507,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bundesstrassen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4558,7 +4558,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bundesstrasse_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4609,7 +4609,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bundesstrasse_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4660,7 +4660,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bundesstrasse_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4711,7 +4711,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bundesstrasse_3&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4762,7 +4762,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Autobahnen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4813,7 +4813,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Autobahn_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4864,7 +4864,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Autobahn_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4915,7 +4915,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Autobahn_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -4966,7 +4966,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Autobahn_3&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5017,7 +5017,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Bahn&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5068,7 +5068,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=bahn_00&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5119,7 +5119,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=bahn_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5170,7 +5170,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=bahn_02&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5221,7 +5221,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Ortschaften&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5272,7 +5272,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_01&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5323,7 +5323,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5374,7 +5374,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5425,7 +5425,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_2&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5476,7 +5476,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_3&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5527,7 +5527,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_4&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5578,7 +5578,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_5&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5629,7 +5629,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_6&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5680,7 +5680,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=orte_7&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5731,7 +5731,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=schutzhuette_0&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5782,7 +5782,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=schutzhuette_1&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5833,7 +5833,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=berge&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5884,7 +5884,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=Leitungen&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5935,7 +5935,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=ax_leitung&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
@@ -5986,7 +5986,7 @@
                 "method": "GET",
                 "type": "image/png",
                 "href": "https://geo5.service24.rlp.de/wms/karte_rp.fcgi?REQUEST=GetMap&VERSION=1.1.1&SERVICE=WMS&LAYERS=leitungsmasten&format=image/png&HEIGHT=515&WIDTH=733&SRS=EPSG:4326&BBOX=7.2954196069977,50.354904066182,7.328542828011,50.370030397704&STYLES=",
-                "extension": { "active": true }
+                "extension": { "active": false }
               }
             ],
             "styles": [
