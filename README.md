@@ -8,7 +8,11 @@ Currently, only the GeoJSON format is supported.
 
 All visible layers are shown in a flat hierarchy within the layer tree. Additional layers can be added from the layer catalog. The folder structure defined in the OWS Context document is supported.
 
-## Setup
+## Installation of the OWS Context addon
+
+Copy the addon at [./addons_3_0_0/owsContext/](./addons_3_0_0/owsContext/) into the `addons/addons_3_0_0` folder of your Masterportal instance. Configuration options are described [here](./addons_3_0_0/owsContext/doc/README.md).
+
+## Standalone demo
 
 - use node v18.x, e.g. `nvm use v18.19.1`
 - run `./initSetup.sh`
