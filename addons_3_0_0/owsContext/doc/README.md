@@ -1,6 +1,6 @@
 # OWS Context Addon
 
-This addon gives users the possibility to import OGC OWS Context documents into the MasterPortal. A new button "OWS Context" is added to the main menu and allows the user to submit a remote URL to a OWS Context. The official documentation for OWS Context documents is available here:
+This addon gives users the possibility to import OGC OWS Context documents into the Masterportal. A new button "OWS Context" is added to the main menu and allows the user to submit a remote URL to an OWS Context. The official documentation for OWS Context documents is available here:
 
 http://www.owscontext.org/
 
