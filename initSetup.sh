@@ -7,7 +7,6 @@ set -e
 
 GIT_COMMIT=e4f81fc874efb7b6297c3684f6a32bdc5f8dfc81
 
-
 if [ ! -d "masterportal-code" ]; then
     git clone https://geowerkstatt@bitbucket.org/geowerkstatt-hamburg/masterportal.git masterportal-code
 fi
