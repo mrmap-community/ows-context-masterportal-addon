@@ -1,18 +1,22 @@
 {
-  "Portalconfig": {
-    "mapView": {
-      "backgroundImage": "https://geodienste.hamburg.de/lgv-config/img/backgroundCanvas.jpeg",
-      "startZoomLevel": 2,
-      "startCenter": [
-        476832.44,
-        5550430.01
-      ],
-      "extent": [
-        10000,
-        4850000,
-        1025000.4,
-        9000000
-      ]
+  "portalConfig": {
+    "map": {
+      "mapView": {
+        "backgroundImage": "https://geodienste.hamburg.de/lgv-config/img/backgroundCanvas.jpeg",
+        "startZoomLevel": 2,
+        "startCenter": [
+          476832.44,
+          5550430.01
+        ],
+        "extent": [
+          10000,
+          4850000,
+          1025000.4,
+          9000000
+        ]
+      },
+      "controls": {
+      }
     },
     "portalFooter": {
       "urls": [
@@ -28,8 +32,6 @@
         }
       ],
       "scaleLine": true
-    },
-    "controls": {
     },
     "tree": {
       "layerPillsAmount": 2,
@@ -72,8 +74,8 @@
       ]
     }
   },
-  "Themenconfig": {
-    "Baselayer": {
+  "layerConfig": {
+    "baselayer": {
       "elements": [
         {
           "id": "basemap1",
@@ -84,7 +86,7 @@
         }
       ]
     },
-    "Fachdaten": {
+    "subjectlayer": {
       "elements": []
     }
   }
