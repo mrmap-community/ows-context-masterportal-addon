@@ -3,9 +3,9 @@
 # Stop at first command failure.
 set -e
 
-#nvm use v18
+#nvm use v20
 
-GIT_COMMIT=e4f81fc874efb7b6297c3684f6a32bdc5f8dfc81
+GIT_COMMIT=104eb70a11a97a16cb699ccad908646909d88b01
 
 if [ ! -d "masterportal-code" ]; then
     git clone https://geowerkstatt@bitbucket.org/geowerkstatt-hamburg/masterportal.git masterportal-code

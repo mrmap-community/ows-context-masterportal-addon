@@ -14,7 +14,7 @@ Copy the addon at [./addons_3_0_0/owsContext/](./addons_3_0_0/owsContext/) into 
 
 ## Standalone demo
 
-- use node v18.x, e.g. `nvm use v18.19.1`
+- use node v20.x, e.g. `nvm use v20.12.0`
 - run `./initSetup.sh`
 - `cd masterportal-code && npm run start`
 - Masterportal will be available at `https://localhost:9001`
