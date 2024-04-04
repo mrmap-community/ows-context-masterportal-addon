@@ -34,11 +34,18 @@
       "scaleLine": true
     },
     "tree": {
-      "layerPillsAmount": 2,
+      "showFolderPath": true,
       "highlightedFeatures": {
         "active": true
       },
-      "addLayerButton": true
+      "addLayerButton": {
+        "active": true,
+        "searchBar": {
+          "active": true,
+          "searchInterfaceInstanceId": "elasticSearch_0",
+          "searchCategory": "Thema (externe Fachdaten)"
+        }
+      }
     },
     "mainMenu": {
       "expanded": true,
@@ -68,7 +75,7 @@
         [
           {
             "type": "measure",
-            "name": "Entfernung sessen"
+            "name": "Entfernung messen"
           }
         ]
       ]

@@ -92,7 +92,7 @@ export default {
             const modifiedMenu = {
                 ...this.mainMenu,
                 title: {
-                    link: metadataUrl,
+                    link: metadataUrl[0],
                     logo: "",
                     text: context.properties?.title ?? "Unnamed OWS Context",
                     tooltip: context.properties?.title ?? "Unnamed OWS Context"
@@ -110,7 +110,8 @@ export default {
                     elements: []
                 },
                 [treeSubjectsKey]: {
-                    elements: tree
+                    // reverse tree to match OWS Context layer order
+                    elements: tree.reverse()
                 }
             };
 

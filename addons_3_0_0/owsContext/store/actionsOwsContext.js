@@ -69,8 +69,8 @@ const actions = {
                 transparent: true,
                 urlIsVisible: true,
                 featureCount: "1",
-                minScale: layer.properties?.minScaleDenominator,
-                maxScale: layer.properties?.maxScaleDenominator,
+                minScale: layer.properties?.minScaleDenominator || undefined, // todo: minScaleDenominator should not be set to 0 in owsContext
+                maxScale: layer.properties?.maxScaleDenominator || undefined, // todo: maxScaleDenominator should not be set to 0 in owsContext
                 type: "layer",
                 crs: crs,
                 gfiAttributes: getFeatureInfoOperation ? "showAll" : "ignore",
@@ -159,8 +159,10 @@ const actions = {
 
             const id = uniqueId();
 
+            // todo: we should return a list of layers here instead of subfolders if all sublements are layers
+
             return {
-                name: folder,
+                name: owcFolder.properties.title ?? folder,
                 id: isKmlFolder ? "kmlFolder" : id,
                 type: "folder",
                 elements: folder && await dispatch("getFolderConfigs", {owcList: subElements, level: level + 1}),
@@ -222,7 +224,7 @@ const actions = {
                 filename: "test.kml"
             };
 
-            await dispatch("Modules/FileImport/importKML", layerConfig, {root: true});
+            await dispatch("Modules/FileImport/importFile", layerConfig, {root: true});
         }
     }
 
